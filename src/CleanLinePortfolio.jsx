@@ -311,10 +311,6 @@ export default function CleanLinePortfolio() {
   const [active, setActive] = useState("home");
   const [selectedProjectId, setSelectedProjectId] = useState(sideProjects[0].id);
 
-  if (!entered) {
-    return <IntroGate onEnter={() => setEntered(true)} />;
-  }
-
   useEffect(() => {
     if (!entered) return;
 
