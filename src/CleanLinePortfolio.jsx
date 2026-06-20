@@ -2,15 +2,56 @@ import React, { useEffect, useState } from "react";
 
 const navItems = [
   { id: "home", label: "Home" },
+  { id: "credentials", label: "Credentials" },
+  { id: "skills", label: "Skills" },
   { id: "work", label: "Work" },
   { id: "approach", label: "Approach" },
   { id: "side-projects", label: "Side Projects" },
-  { id: "skills", label: "Skills" },
   { id: "archive", label: "Archive" },
   { id: "contact", label: "Contact" },
 ];
 
+
 const domains = ["Tax", "Law", "Video"];
+
+const credentials = [
+  {
+    code: "CKA",
+    title: "Certified Kubernetes Administrator",
+    desc: "Kubernetes 운영, 워크로드, 네트워킹, 스토리지, 트러블슈팅 기본기",
+    weight: "major",
+  },
+  {
+    code: "AWS CCP",
+    title: "AWS Certified Cloud Practitioner",
+    desc: "AWS 클라우드 기본 개념, 주요 서비스, 보안, 과금 구조 이해",
+    weight: "major",
+  },
+  {
+    code: "Linux 1",
+    title: "리눅스마스터 1급",
+    desc: "Linux 시스템 운영, 쉘 환경, 네트워크/서비스 관리 기본기",
+    weight: "major",
+  },
+  {
+    code: "SQLD",
+    title: "SQL Developer",
+    desc: "관계형 데이터베이스, SQL, 모델링 기본 이해",
+    weight: "normal",
+  },
+  {
+    code: "ADsP",
+    title: "데이터분석 준전문가",
+    desc: "데이터 분석 프로세스, 통계, 분석 기획 기본 이해",
+    weight: "normal",
+  },
+  {
+    code: "NET 2",
+    title: "네트워크관리사 2급",
+    desc: "TCP/IP, 네트워크 구성, 인프라 기본 개념",
+    weight: "normal",
+  },
+];
 
 const workItems = [
   {
@@ -178,7 +219,7 @@ function Section({ id, index, title, desc, children }) {
           {String(index).padStart(2, "0")} / {id}
         </div>
         <div>
-          <h2 className="text-4xl font-semibold tracking-[-0.05em] text-black md:text-6xl">
+          <h2 className="reveal-text text-4xl font-semibold tracking-[-0.05em] text-black md:text-6xl">
             {title}
           </h2>
           {desc && <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-600">{desc}</p>}
@@ -193,7 +234,7 @@ function LineButton({ children, href = "#" }) {
   return (
     <a
       href={href}
-      className="group inline-flex items-center gap-3 border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:bg-black hover:text-white"
+      className="group inline-flex items-center gap-3 border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
     >
       {children}
       <span className="transition group-hover:translate-x-1">→</span>
@@ -205,13 +246,13 @@ function SkillBadge({ logo, fallback, name }) {
   const [failed, setFailed] = useState(false);
 
   return (
-    <span className="group inline-flex items-center border border-black text-sm font-medium transition hover:bg-black hover:text-white">
+    <span className="group inline-flex items-center border border-black text-sm font-medium transition hover:-translate-y-1 hover:bg-black hover:text-white">
       <span className="grid h-12 min-w-12 place-items-center border-r border-black bg-white px-3 group-hover:border-white">
         {!failed ? (
           <img
             src={logo}
             alt={`${name} logo`}
-            className="h-6 w-6 object-contain"
+            className="h-6 w-6 object-contain transition group-hover:scale-110"
             loading="lazy"
             onError={() => setFailed(true)}
           />
@@ -223,6 +264,29 @@ function SkillBadge({ logo, fallback, name }) {
       </span>
       <span className="px-4 py-3">{name}</span>
     </span>
+  );
+}
+
+
+function CredentialCard({ credential }) {
+  const isMajor = credential.weight === "major";
+
+  return (
+    <article
+      className={`group border-b border-r border-black p-7 transition duration-200 hover:-translate-y-1 hover:bg-black hover:text-white ${
+        isMajor ? "min-h-[260px]" : "min-h-[210px]"
+      }`}
+    >
+      <span className="inline-flex border border-current px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+        {credential.code}
+      </span>
+      <h3 className={`${isMajor ? "mt-9 text-3xl" : "mt-7 text-2xl"} font-semibold leading-tight tracking-[-0.05em]`}>
+        {credential.title}
+      </h3>
+      <p className="mt-5 text-sm leading-7 text-neutral-600 transition group-hover:text-white/70">
+        {credential.desc}
+      </p>
+    </article>
   );
 }
 
@@ -243,8 +307,13 @@ function DetailBlock({ title, items }) {
 }
 
 export default function CleanLinePortfolio() {
+  const [entered, setEntered] = useState(false);
   const [active, setActive] = useState("home");
   const [selectedProjectId, setSelectedProjectId] = useState(sideProjects[0].id);
+
+  if (!entered) {
+    return <IntroGate onEnter={() => setEntered(true)} />;
+  }
 
   useEffect(() => {
     const sections = navItems
@@ -272,6 +341,133 @@ export default function CleanLinePortfolio() {
     return () => observer.disconnect();
   }, []);
 
+  function IntroGate({ onEnter }) {
+  return (
+    <main
+      className="min-h-screen bg-white text-black"
+      style={{
+        fontFamily:
+          "'Noto Sans KR', 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif",
+      }}
+    >
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+
+        @keyframes introImage {
+          from {
+            opacity: 0;
+            transform: scale(0.96) rotate(-1deg);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+
+        @keyframes introText {
+          from {
+            opacity: 0;
+            transform: translateY(24px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .intro-image {
+          animation: introImage 0.7s ease both;
+        }
+
+        .intro-text {
+          animation: introText 0.7s ease 0.15s both;
+        }
+      `}</style>
+
+      <section className="grid min-h-screen grid-cols-1 border-black lg:grid-cols-[1fr_1.1fr]">
+        <div className="relative flex items-center justify-center border-b border-black p-6 lg:border-b-0 lg:border-r">
+          <div className="intro-image relative w-full max-w-[520px] overflow-hidden border border-black bg-white">
+            <img
+              src="/profile.jpg"
+              alt="Profile"
+              className="aspect-[4/5] w-full object-cover"
+            />
+
+            <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+              Backend / DevOps
+            </div>
+
+            <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+              Portfolio.exe
+            </div>
+          </div>
+        </div>
+
+        <div className="intro-text flex flex-col justify-center px-6 py-16 lg:px-16">
+          <p className="mb-8 text-xs font-bold uppercase tracking-[0.28em] text-neutral-500">
+            CHOI.DEV / First Impression
+          </p>
+
+          <h1 className="max-w-4xl text-6xl font-black leading-[0.98] tracking-[-0.08em] md:text-8xl">
+            졸라
+            <br />
+            궁금한가요?
+          </h1>
+
+          <p className="mt-10 max-w-2xl text-lg leading-9 text-neutral-600">
+            사진은 장난인데,
+            <br />
+            포트폴리오는 생각보다 진지합니다.
+            <br />
+            제가 뭘 만들고, 어디까지 해봤고, 왜 자꾸 구조를 바꾸려는지 보여드리겠습니다.
+          </p>
+
+          <div className="mt-12 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={onEnter}
+              className="group border border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:-translate-y-1"
+            >
+              포트폴리오 보기
+              <span className="ml-3 inline-block transition group-hover:translate-x-1">
+                →
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onEnter}
+              className="border border-black bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:-translate-y-1 hover:bg-black hover:text-white"
+            >
+              일단 눌러보셈
+            </button>
+          </div>
+
+          <div className="mt-16 grid border-y border-black md:grid-cols-3">
+            {[
+              ["Role", "Backend"],
+              ["Cloud", "CKA / AWS"],
+              ["Track", "MSA / Video / AI"],
+            ].map(([k, v], index) => (
+              <div
+                key={k}
+                className={`py-5 md:px-5 ${index !== 0 ? "md:border-l md:border-black" : ""}`}
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-neutral-500">
+                  {k}
+                </p>
+                <p className="mt-2 text-base font-bold tracking-[-0.04em]">
+                  {v}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
   const activeLabel = navItems.find((item) => item.id === active)?.label ?? "Home";
   const selectedProject = sideProjects.find((project) => project.id === selectedProjectId) ?? sideProjects[0];
 
@@ -282,6 +478,54 @@ export default function CleanLinePortfolio() {
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        ::selection {
+          background: #000;
+          color: #fff;
+        }
+
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(18px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes drawLine {
+          to {
+            transform: scaleX(1);
+          }
+        }
+
+        .reveal-text {
+          animation: fadeUp 0.75s ease both;
+        }
+
+        .hero-line {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hero-line::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -1px;
+          width: 100%;
+          height: 2px;
+          background: #000;
+          transform: scaleX(0);
+          transform-origin: left;
+          animation: drawLine 0.9s ease 0.25s forwards;
+        }
       `}</style>
 
       <div className="fixed left-0 top-0 z-50 hidden h-screen w-[260px] border-r border-black bg-white px-7 py-8 lg:block">
@@ -331,45 +575,46 @@ export default function CleanLinePortfolio() {
 
       <div className="mx-auto max-w-7xl px-5 lg:ml-[260px] lg:max-w-none lg:px-12 xl:px-16">
         <section id="home" className="min-h-[calc(100vh-73px)] scroll-mt-24 py-20 md:py-28">
-          <div className="border-b border-black pb-10">
+          <div className="hero-line border-b border-black pb-10">
             <div className="grid gap-12 xl:grid-cols-[180px_1fr]">
               <div className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
                 00 / home
               </div>
               <div>
-                <p className="mb-8 text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
+                <p className="reveal-text mb-8 text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
                   Backend / DevOps Portfolio
                 </p>
-                <div className="mb-8 flex flex-wrap gap-2">
+                <div className="reveal-text mb-8 flex flex-wrap gap-2">
                   {domains.map((domain) => (
                     <span key={domain} className="border border-black px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]">
                       {domain}
                     </span>
                   ))}
                 </div>
-                <h1 className="max-w-6xl text-5xl font-semibold leading-[1.08] tracking-[-0.06em] md:text-8xl">
+                <h1 className="reveal-text max-w-6xl text-5xl font-semibold leading-[1.08] tracking-[-0.06em] md:text-8xl">
                   문제를 고치는 데서 끝내지 않고,
                   <br />
                   반복되는 구조를 바꿉니다.
                 </h1>
-                <p className="mt-10 max-w-3xl text-lg leading-9 text-neutral-600">
+                <p className="reveal-text mt-10 max-w-3xl text-lg leading-9 text-neutral-600">
                   SI 실무에서 마주한 업무 시스템의 문제를 Java/Spring, React, DB, 운영 로그 관점으로 연결해 해결했습니다.
                   그리고 그 경험을 Spring MSA, Video Streaming, AI 기반 서비스형 사이드 프로젝트로 확장하고 있습니다.
                 </p>
 
-                <div className="mt-12 flex flex-wrap gap-3">
-                  <LineButton href="#work">View Work</LineButton>
+                <div className="reveal-text mt-12 flex flex-wrap gap-3">
+                  <LineButton href="#credentials">View Credentials</LineButton>
                   <LineButton href="#side-projects">View Side Projects</LineButton>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="grid border-b border-black md:grid-cols-3">
+          <div className="grid border-b border-black md:grid-cols-4">
             {[
               ["Role", "Backend / DevOps"],
               ["Domain", "Tax · Law · Video"],
               ["Track", "MSA · Video Streaming · AI Service"],
+              ["Credential", "CKA · AWS · Linux"],
             ].map(([k, v], idx) => (
               <div key={k} className={`py-6 md:px-6 ${idx !== 0 ? "md:border-l md:border-black" : ""}`}>
                 <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">{k}</p>
@@ -380,8 +625,39 @@ export default function CleanLinePortfolio() {
         </section>
 
         <Section
-          id="work"
+          id="credentials"
           index={1}
+          title="Credentials"
+          desc="클라우드 네이티브, 리눅스, 데이터, 네트워크 기본기를 자격증으로 보완했습니다. CKA, AWS, Linux는 Backend/DevOps 방향성을 먼저 보여주는 신호로 배치했습니다."
+        >
+          <div className="grid border-l border-t border-black md:grid-cols-2 xl:grid-cols-3">
+            {credentials.map((credential) => (
+              <CredentialCard key={credential.code} credential={credential} />
+            ))}
+          </div>
+        </Section>
+
+        <Section
+          id="skills"
+          index={2}
+          title="Skills"
+          desc="기술 스택은 실제 SVG 로고를 사용하되, 전체 톤은 선과 여백 중심으로 단순하게 유지합니다."
+        >
+          <div className="flex flex-wrap gap-3 border-y border-black py-8">
+            {skills.map((skill) => (
+              <SkillBadge
+                key={skill.name}
+                logo={skill.logo}
+                fallback={skill.fallback}
+                name={skill.name}
+              />
+            ))}
+          </div>
+        </Section>
+
+        <Section
+          id="work"
+          index={3}
           title="Work"
           desc="업무 상세를 과하게 드러내기보다, 하나의 실무 프로젝트 안에서 어떤 기술 범위와 문제 해결 경험을 쌓았는지 보여줍니다."
         >
@@ -400,7 +676,7 @@ export default function CleanLinePortfolio() {
 
         <Section
           id="approach"
-          index={2}
+          index={4}
           title="Approach"
           desc="경력기술서의 핵심 내용을 업무명 중심이 아니라 개발 방식 중심으로 압축합니다. 검증, 연계, 데이터 흐름, 운영 분석 경험을 통해 어떤 방식으로 문제를 다루는지 보여줍니다."
         >
@@ -417,7 +693,7 @@ export default function CleanLinePortfolio() {
 
         <Section
           id="side-projects"
-          index={3}
+          index={5}
           title="Side Projects"
           desc="실무에서 느낀 구조적 한계를 MSA 서비스, Video Streaming 서비스, AI 기반 실제 서비스 프로젝트 안에서 다시 설계하고 구현합니다."
         >
@@ -435,7 +711,7 @@ export default function CleanLinePortfolio() {
                   <button
                     type="button"
                     onClick={() => setSelectedProjectId(project.id)}
-                    className={`mt-7 border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
+                    className={`mt-7 border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition hover:-translate-y-0.5 ${
                       selected ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"
                     }`}
                   >
@@ -446,7 +722,7 @@ export default function CleanLinePortfolio() {
             })}
           </div>
 
-          <div className="mt-10 border-y border-black py-10">
+          <div key={selectedProject.id} className="reveal-text mt-10 border-y border-black py-10">
             <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">Project Detail</p>
@@ -468,7 +744,7 @@ export default function CleanLinePortfolio() {
                   <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500">Links</p>
                   <div className="flex flex-wrap gap-3">
                     {selectedProject.evidence.map((item) => (
-                      <a key={item} href="#" className="border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] hover:bg-black hover:text-white">
+                      <a key={item} href="#" className="border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white">
                         {item}
                       </a>
                     ))}
@@ -480,26 +756,8 @@ export default function CleanLinePortfolio() {
         </Section>
 
         <Section
-          id="skills"
-          index={4}
-          title="Skills"
-          desc="기술 스택은 실제 SVG 로고를 사용하되, 전체 톤은 선과 여백 중심으로 단순하게 유지합니다."
-        >
-          <div className="flex flex-wrap gap-3 border-y border-black py-8">
-            {skills.map((skill) => (
-              <SkillBadge
-                key={skill.name}
-                logo={skill.logo}
-                fallback={skill.fallback}
-                name={skill.name}
-              />
-            ))}
-          </div>
-        </Section>
-
-        <Section
           id="archive"
-          index={5}
+          index={6}
           title="Archive"
           desc="블로그는 기술 사용 목록이 아니라, 문제 해결 과정과 의사결정 기록으로 보여줍니다."
         >
@@ -519,13 +777,13 @@ export default function CleanLinePortfolio() {
 
         <Section
           id="contact"
-          index={6}
+          index={7}
           title="Contact"
           desc="마지막은 불필요한 설명 없이 링크만 배치합니다."
         >
           <div className="flex flex-wrap gap-4 border-y border-black py-8">
             {["Email", "GitHub", "Resume PDF", "Blog"].map((item) => (
-              <a key={item} href="#" className="border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] hover:bg-black hover:text-white">
+              <a key={item} href="#" className="border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white">
                 {item}
               </a>
             ))}
