@@ -316,6 +316,8 @@ export default function CleanLinePortfolio() {
   }
 
   useEffect(() => {
+    if (!entered) return;
+
     const sections = navItems
       .map((item) => document.getElementById(item.id))
       .filter(Boolean);
@@ -339,137 +341,142 @@ export default function CleanLinePortfolio() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [entered]);
+
 
   function IntroGate({ onEnter }) {
-  return (
-    <main
-      className="min-h-screen bg-white text-black"
-      style={{
-        fontFamily:
-          "'Noto Sans KR', 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif",
-      }}
-    >
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+    return (
+      <main
+        className="min-h-screen bg-white text-black"
+        style={{
+          fontFamily:
+            "'Noto Sans KR', 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif",
+        }}
+      >
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
 
-        @keyframes introImage {
-          from {
-            opacity: 0;
-            transform: scale(0.96) rotate(-1deg);
+          @keyframes introImage {
+            from {
+              opacity: 0;
+              transform: scale(0.96) rotate(-1deg);
+            }
+            to {
+              opacity: 1;
+              transform: scale(1) rotate(0deg);
+            }
           }
-          to {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
+
+          @keyframes introText {
+            from {
+              opacity: 0;
+              transform: translateY(24px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-        }
 
-        @keyframes introText {
-          from {
-            opacity: 0;
-            transform: translateY(24px);
+          .intro-image {
+            animation: introImage 0.7s ease both;
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+
+          .intro-text {
+            animation: introText 0.7s ease 0.15s both;
           }
-        }
+        `}</style>
 
-        .intro-image {
-          animation: introImage 0.7s ease both;
-        }
+        <section className="grid min-h-screen grid-cols-1 border-black lg:grid-cols-[1fr_1.1fr]">
+          <div className="relative flex items-center justify-center border-b border-black p-6 lg:border-b-0 lg:border-r">
+            <div className="intro-image relative w-full max-w-[520px] overflow-hidden border border-black bg-white">
+              <img
+                src="/profile.jpg"
+                alt="Profile"
+                className="aspect-[4/5] w-full object-cover"
+              />
 
-        .intro-text {
-          animation: introText 0.7s ease 0.15s both;
-        }
-      `}</style>
-
-      <section className="grid min-h-screen grid-cols-1 border-black lg:grid-cols-[1fr_1.1fr]">
-        <div className="relative flex items-center justify-center border-b border-black p-6 lg:border-b-0 lg:border-r">
-          <div className="intro-image relative w-full max-w-[520px] overflow-hidden border border-black bg-white">
-            <img
-              src="/profile.jpg"
-              alt="Profile"
-              className="aspect-[4/5] w-full object-cover"
-            />
-
-            <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
-              Backend / DevOps
-            </div>
-
-            <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
-              Portfolio.exe
-            </div>
-          </div>
-        </div>
-
-        <div className="intro-text flex flex-col justify-center px-6 py-16 lg:px-16">
-          <p className="mb-8 text-xs font-bold uppercase tracking-[0.28em] text-neutral-500">
-            CHOI.DEV / First Impression
-          </p>
-
-          <h1 className="max-w-4xl text-6xl font-black leading-[0.98] tracking-[-0.08em] md:text-8xl">
-            졸라
-            <br />
-            궁금한가요?
-          </h1>
-
-          <p className="mt-10 max-w-2xl text-lg leading-9 text-neutral-600">
-            사진은 장난인데,
-            <br />
-            포트폴리오는 생각보다 진지합니다.
-            <br />
-            제가 뭘 만들고, 어디까지 해봤고, 왜 자꾸 구조를 바꾸려는지 보여드리겠습니다.
-          </p>
-
-          <div className="mt-12 flex flex-wrap gap-3">
-            <button
-              type="button"
-              onClick={onEnter}
-              className="group border border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:-translate-y-1"
-            >
-              포트폴리오 보기
-              <span className="ml-3 inline-block transition group-hover:translate-x-1">
-                →
-              </span>
-            </button>
-
-            <button
-              type="button"
-              onClick={onEnter}
-              className="border border-black bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:-translate-y-1 hover:bg-black hover:text-white"
-            >
-              일단 눌러보셈
-            </button>
-          </div>
-
-          <div className="mt-16 grid border-y border-black md:grid-cols-3">
-            {[
-              ["Role", "Backend"],
-              ["Cloud", "CKA / AWS"],
-              ["Track", "MSA / Video / AI"],
-            ].map(([k, v], index) => (
-              <div
-                key={k}
-                className={`py-5 md:px-5 ${index !== 0 ? "md:border-l md:border-black" : ""}`}
-              >
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-neutral-500">
-                  {k}
-                </p>
-                <p className="mt-2 text-base font-bold tracking-[-0.04em]">
-                  {v}
-                </p>
+              <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+                Backend / DevOps
               </div>
-            ))}
+
+              <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+                Portfolio.exe
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
-  );
-}
+
+          <div className="intro-text flex flex-col justify-center px-6 py-16 lg:px-16">
+            <p className="mb-8 text-xs font-bold uppercase tracking-[0.28em] text-neutral-500">
+              CHOI.DEV / First Impression
+            </p>
+
+            <h1 className="max-w-4xl text-6xl font-black leading-[0.98] tracking-[-0.08em] md:text-8xl">
+              졸라
+              <br />
+              궁금한가요?
+            </h1>
+
+            <p className="mt-10 max-w-2xl text-lg leading-9 text-neutral-600">
+              사진은 장난인데,
+              <br />
+              포트폴리오는 생각보다 진지합니다.
+              <br />
+              제가 뭘 만들고, 어디까지 해봤고, 왜 자꾸 구조를 바꾸려는지 보여드리겠습니다.
+            </p>
+
+            <div className="mt-12 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={onEnter}
+                className="group border border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:-translate-y-1"
+              >
+                포트폴리오 보기
+                <span className="ml-3 inline-block transition group-hover:translate-x-1">
+                  →
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={onEnter}
+                className="border border-black bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:-translate-y-1 hover:bg-black hover:text-white"
+              >
+                일단 눌러보셈
+              </button>
+            </div>
+
+            <div className="mt-16 grid border-y border-black md:grid-cols-3">
+              {[
+                ["Role", "Backend"],
+                ["Cloud", "CKA / AWS"],
+                ["Track", "MSA / Video / AI"],
+              ].map(([k, v], index) => (
+                <div
+                  key={k}
+                  className={`py-5 md:px-5 ${index !== 0 ? "md:border-l md:border-black" : ""}`}
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-neutral-500">
+                    {k}
+                  </p>
+                  <p className="mt-2 text-base font-bold tracking-[-0.04em]">
+                    {v}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   const activeLabel = navItems.find((item) => item.id === active)?.label ?? "Home";
   const selectedProject = sideProjects.find((project) => project.id === selectedProjectId) ?? sideProjects[0];
+
+  if (!entered) {
+    return <IntroGate onEnter={() => setEntered(true)} />;
+  }
 
   return (
     <main
