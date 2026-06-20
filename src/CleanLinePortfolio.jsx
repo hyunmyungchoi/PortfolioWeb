@@ -11,46 +11,89 @@ const navItems = [
   { id: "contact", label: "Contact" },
 ];
 
-
 const domains = ["Tax", "Law", "Video"];
 
 const credentials = [
   {
     code: "CKA",
     title: "Certified Kubernetes Administrator",
+    issuer: "Cloud Native Computing Foundation",
     desc: "Kubernetes 운영, 워크로드, 네트워킹, 스토리지, 트러블슈팅 기본기",
+    focus: "Kubernetes / Cloud Native",
+    logo: "https://cdn.simpleicons.org/kubernetes/326CE5",
+    fallback: "K8S",
     weight: "major",
   },
   {
     code: "AWS CCP",
     title: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services",
     desc: "AWS 클라우드 기본 개념, 주요 서비스, 보안, 과금 구조 이해",
+    focus: "AWS Cloud Foundation",
+    logo: "/aws.jpg",
+    fallback: "AWS",
     weight: "major",
   },
   {
     code: "Linux 1",
     title: "리눅스마스터 1급",
+    issuer: "Linux System Administration",
     desc: "Linux 시스템 운영, 쉘 환경, 네트워크/서비스 관리 기본기",
+    focus: "Linux / Infra Operation",
+    logo: "/Linux.png",
+    fallback: "LINUX",
     weight: "major",
   },
   {
     code: "SQLD",
     title: "SQL Developer",
+    issuer: "KData",
     desc: "관계형 데이터베이스, SQL, 모델링 기본 이해",
+    focus: "RDB / SQL Modeling",
+    logo: "/kdata.png",
+    fallback: "SQL",
     weight: "normal",
   },
   {
     code: "ADsP",
     title: "데이터분석 준전문가",
+    issuer: "KData",
     desc: "데이터 분석 프로세스, 통계, 분석 기획 기본 이해",
+    focus: "Data / Analytics",
+    logo: "/kdata.png",
+    fallback: "DATA",
     weight: "normal",
   },
   {
     code: "NET 2",
     title: "네트워크관리사 2급",
+    issuer: "한국정보통신협회",
     desc: "TCP/IP, 네트워크 구성, 인프라 기본 개념",
+    focus: "TCP/IP / Network",
+    logo: "/icqa.png",
+    fallback: "NET",
     weight: "normal",
   },
+];
+
+const skills = [
+  { name: "Java", logo: "https://cdn.simpleicons.org/openjdk/000000", fallback: "J" },
+  { name: "Spring", logo: "https://cdn.simpleicons.org/spring/6DB33F", fallback: "S" },
+  { name: "Spring Security", logo: "https://cdn.simpleicons.org/springsecurity/6DB33F", fallback: "SEC" },
+  { name: "Authorization Server", logo: "https://cdn.simpleicons.org/openid/000000", fallback: "AUTH" },
+  { name: "OAuth2/OIDC", logo: "https://cdn.simpleicons.org/openid/000000", fallback: "OIDC" },
+  { name: "BFF Pattern", logo: "https://cdn.simpleicons.org/jsonwebtokens/000000", fallback: "BFF" },
+  { name: "React", logo: "https://cdn.simpleicons.org/react/61DAFB", fallback: "R" },
+  { name: "TypeScript", logo: "https://cdn.simpleicons.org/typescript/3178C6", fallback: "TS" },
+  { name: "Oracle", logo: "https://cdn.simpleicons.org/oracle/F80000", fallback: "DB" },
+  { name: "MyBatis", logo: "https://cdn.simpleicons.org/apache/000000", fallback: "SQL" },
+  { name: "Redis", logo: "https://cdn.simpleicons.org/redis/FF4438", fallback: "RE" },
+  { name: "Kafka", logo: "https://cdn.simpleicons.org/apachekafka/231F20", fallback: "K" },
+  { name: "Docker", logo: "https://cdn.simpleicons.org/docker/2496ED", fallback: "DO" },
+  { name: "Kubernetes", logo: "https://cdn.simpleicons.org/kubernetes/326CE5", fallback: "K8S" },
+  { name: "Kibana", logo: "https://cdn.simpleicons.org/kibana/005571", fallback: "LOG" },
+  { name: "WebRTC", logo: "https://cdn.simpleicons.org/webrtc/333333", fallback: "RTC" },
+  { name: "FFmpeg", logo: "https://cdn.simpleicons.org/ffmpeg/007808", fallback: "FF" },
 ];
 
 const workItems = [
@@ -87,26 +130,6 @@ const approaches = [
     "Operation & Documentation",
     "운영 이슈는 Kibana 로그, Trace ID, DB 상태를 함께 확인하고 원인과 조치 내용을 문서화합니다.",
   ],
-];
-
-const skills = [
-  { name: "Java", logo: "https://cdn.simpleicons.org/openjdk/000000", fallback: "J" },
-  { name: "Spring", logo: "https://cdn.simpleicons.org/spring/6DB33F", fallback: "S" },
-  { name: "Spring Security", logo: "https://cdn.simpleicons.org/springsecurity/6DB33F", fallback: "SEC" },
-  { name: "Authorization Server", logo: "https://cdn.simpleicons.org/openid/000000", fallback: "AUTH" },
-  { name: "OAuth2/OIDC", logo: "https://cdn.simpleicons.org/openid/000000", fallback: "OIDC" },
-  { name: "BFF Pattern", logo: "https://cdn.simpleicons.org/jsonwebtokens/000000", fallback: "BFF" },
-  { name: "React", logo: "https://cdn.simpleicons.org/react/61DAFB", fallback: "R" },
-  { name: "TypeScript", logo: "https://cdn.simpleicons.org/typescript/3178C6", fallback: "TS" },
-  { name: "Oracle", logo: "https://cdn.simpleicons.org/oracle/F80000", fallback: "DB" },
-  { name: "MyBatis", logo: "https://cdn.simpleicons.org/apache/000000", fallback: "SQL" },
-  { name: "Redis", logo: "https://cdn.simpleicons.org/redis/FF4438", fallback: "RE" },
-  { name: "Kafka", logo: "https://cdn.simpleicons.org/apachekafka/231F20", fallback: "K" },
-  { name: "Docker", logo: "https://cdn.simpleicons.org/docker/2496ED", fallback: "DO" },
-  { name: "Kubernetes", logo: "https://cdn.simpleicons.org/kubernetes/326CE5", fallback: "K8S" },
-  { name: "Kibana", logo: "https://cdn.simpleicons.org/kibana/005571", fallback: "LOG" },
-  { name: "WebRTC", logo: "https://cdn.simpleicons.org/webrtc/333333", fallback: "RTC" },
-  { name: "FFmpeg", logo: "https://cdn.simpleicons.org/ffmpeg/007808", fallback: "FF" },
 ];
 
 const sideProjects = [
@@ -267,22 +290,60 @@ function SkillBadge({ logo, fallback, name }) {
   );
 }
 
+function CredentialLogo({ logo, fallback, title }) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="grid h-20 w-20 place-items-center border border-black bg-white transition group-hover:rotate-[-2deg] group-hover:scale-105">
+      {!failed ? (
+        <img
+          src={logo}
+          alt={`${title} mark`}
+          className="h-12 w-12 object-contain"
+          loading="lazy"
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <span className="text-xs font-black uppercase tracking-[-0.04em] text-black">
+          {fallback}
+        </span>
+      )}
+    </div>
+  );
+}
 
 function CredentialCard({ credential }) {
   const isMajor = credential.weight === "major";
 
   return (
     <article
-      className={`group border-b border-r border-black p-7 transition duration-200 hover:-translate-y-1 hover:bg-black hover:text-white ${
-        isMajor ? "min-h-[260px]" : "min-h-[210px]"
+      className={`group relative overflow-hidden border-b border-r border-black bg-white p-7 transition duration-200 hover:-translate-y-1 hover:bg-black hover:text-white ${
+        isMajor ? "min-h-[300px]" : "min-h-[240px]"
       }`}
     >
-      <span className="inline-flex border border-current px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
-        {credential.code}
-      </span>
-      <h3 className={`${isMajor ? "mt-9 text-3xl" : "mt-7 text-2xl"} font-semibold leading-tight tracking-[-0.05em]`}>
+      <div className="absolute right-5 top-5 text-[11px] font-black uppercase tracking-[0.22em] text-neutral-300 transition group-hover:text-white/30">
+        {credential.focus}
+      </div>
+
+      <CredentialLogo
+        logo={credential.logo}
+        fallback={credential.fallback}
+        title={credential.title}
+      />
+
+      <div className="mt-7 flex flex-wrap items-center gap-2">
+        <span className="inline-flex border border-current px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+          {credential.code}
+        </span>
+        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 group-hover:text-white/60">
+          {credential.issuer}
+        </span>
+      </div>
+
+      <h3 className={`${isMajor ? "mt-7 text-3xl" : "mt-6 text-2xl"} font-semibold leading-tight tracking-[-0.05em]`}>
         {credential.title}
       </h3>
+
       <p className="mt-5 text-sm leading-7 text-neutral-600 transition group-hover:text-white/70">
         {credential.desc}
       </p>
@@ -303,6 +364,133 @@ function DetailBlock({ title, items }) {
         ))}
       </ul>
     </div>
+  );
+}
+
+function IntroGate({ onEnter }) {
+  return (
+    <main
+      className="min-h-screen bg-white text-black"
+      style={{
+        fontFamily:
+          "'Noto Sans KR', 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif",
+      }}
+    >
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+
+        @keyframes introImage {
+          from {
+            opacity: 0;
+            transform: scale(0.96) rotate(-1deg);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+
+        @keyframes introText {
+          from {
+            opacity: 0;
+            transform: translateY(24px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .intro-image {
+          animation: introImage 0.7s ease both;
+        }
+
+        .intro-text {
+          animation: introText 0.7s ease 0.15s both;
+        }
+      `}</style>
+
+      <section className="grid min-h-screen grid-cols-1 border-black lg:grid-cols-[1fr_1.1fr]">
+        <div className="relative flex items-center justify-center border-b border-black p-6 lg:border-b-0 lg:border-r">
+          <div className="intro-image relative w-full max-w-[520px] overflow-hidden border border-black bg-white">
+            <img
+              src="/profile.jpg"
+              alt="Profile"
+              className="aspect-[4/5] w-full object-cover"
+            />
+
+            <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+              Backend / DevOps
+            </div>
+
+            <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+              Portfolio.exe
+            </div>
+          </div>
+        </div>
+
+        <div className="intro-text flex flex-col justify-center px-6 py-16 lg:px-16">
+          <p className="mb-8 text-xs font-bold uppercase tracking-[0.28em] text-neutral-500">
+            CHOI.DEV / First Impression
+          </p>
+
+          <h1 className="max-w-4xl text-6xl font-black leading-[0.98] tracking-[-0.08em] md:text-8xl">
+            졸라
+            <br />
+            궁금한가요?
+          </h1>
+
+          <p className="mt-10 max-w-2xl text-lg leading-9 text-neutral-600">
+            사진은 장난인데,
+            <br />
+            포트폴리오는 생각보다 진지합니다.
+            <br />
+            제가 뭘 만들고, 어디까지 해봤고, 왜 자꾸 구조를 바꾸려는지 보여드리겠습니다.
+          </p>
+
+          <div className="mt-12 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={onEnter}
+              className="group border border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:-translate-y-1"
+            >
+              포트폴리오 보기
+              <span className="ml-3 inline-block transition group-hover:translate-x-1">
+                →
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onEnter}
+              className="border border-black bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:-translate-y-1 hover:bg-black hover:text-white"
+            >
+              일단 눌러보셈
+            </button>
+          </div>
+
+          <div className="mt-16 grid border-y border-black md:grid-cols-3">
+            {[
+              ["Role", "Backend"],
+              ["Cloud", "CKA / AWS"],
+              ["Track", "MSA / Video / AI"],
+            ].map(([k, v], index) => (
+              <div
+                key={k}
+                className={`py-5 md:px-5 ${index !== 0 ? "md:border-l md:border-black" : ""}`}
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-neutral-500">
+                  {k}
+                </p>
+                <p className="mt-2 text-base font-bold tracking-[-0.04em]">
+                  {v}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
 
@@ -338,134 +526,6 @@ export default function CleanLinePortfolio() {
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, [entered]);
-
-
-  function IntroGate({ onEnter }) {
-    return (
-      <main
-        className="min-h-screen bg-white text-black"
-        style={{
-          fontFamily:
-            "'Noto Sans KR', 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif",
-        }}
-      >
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
-
-          @keyframes introImage {
-            from {
-              opacity: 0;
-              transform: scale(0.96) rotate(-1deg);
-            }
-            to {
-              opacity: 1;
-              transform: scale(1) rotate(0deg);
-            }
-          }
-
-          @keyframes introText {
-            from {
-              opacity: 0;
-              transform: translateY(24px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          .intro-image {
-            animation: introImage 0.7s ease both;
-          }
-
-          .intro-text {
-            animation: introText 0.7s ease 0.15s both;
-          }
-        `}</style>
-
-        <section className="grid min-h-screen grid-cols-1 border-black lg:grid-cols-[1fr_1.1fr]">
-          <div className="relative flex items-center justify-center border-b border-black p-6 lg:border-b-0 lg:border-r">
-            <div className="intro-image relative w-full max-w-[520px] overflow-hidden border border-black bg-white">
-              <img
-                src="/profile.jpg"
-                alt="Profile"
-                className="aspect-[4/5] w-full object-cover"
-              />
-
-              <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
-                Backend / DevOps
-              </div>
-
-              <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
-                Portfolio.exe
-              </div>
-            </div>
-          </div>
-
-          <div className="intro-text flex flex-col justify-center px-6 py-16 lg:px-16">
-            <p className="mb-8 text-xs font-bold uppercase tracking-[0.28em] text-neutral-500">
-              CHOI.DEV / First Impression
-            </p>
-
-            <h1 className="max-w-4xl text-6xl font-black leading-[0.98] tracking-[-0.08em] md:text-8xl">
-              졸라
-              <br />
-              궁금한가요?
-            </h1>
-
-            <p className="mt-10 max-w-2xl text-lg leading-9 text-neutral-600">
-              사진은 장난인데,
-              <br />
-              포트폴리오는 생각보다 진지합니다.
-              <br />
-              제가 뭘 만들고, 어디까지 해봤고, 왜 자꾸 구조를 바꾸려는지 보여드리겠습니다.
-            </p>
-
-            <div className="mt-12 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={onEnter}
-                className="group border border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:-translate-y-1"
-              >
-                포트폴리오 보기
-                <span className="ml-3 inline-block transition group-hover:translate-x-1">
-                  →
-                </span>
-              </button>
-
-              <button
-                type="button"
-                onClick={onEnter}
-                className="border border-black bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:-translate-y-1 hover:bg-black hover:text-white"
-              >
-                일단 눌러보셈
-              </button>
-            </div>
-
-            <div className="mt-16 grid border-y border-black md:grid-cols-3">
-              {[
-                ["Role", "Backend"],
-                ["Cloud", "CKA / AWS"],
-                ["Track", "MSA / Video / AI"],
-              ].map(([k, v], index) => (
-                <div
-                  key={k}
-                  className={`py-5 md:px-5 ${index !== 0 ? "md:border-l md:border-black" : ""}`}
-                >
-                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-neutral-500">
-                    {k}
-                  </p>
-                  <p className="mt-2 text-base font-bold tracking-[-0.04em]">
-                    {v}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </main>
-    );
-  }
 
   const activeLabel = navItems.find((item) => item.id === active)?.label ?? "Home";
   const selectedProject = sideProjects.find((project) => project.id === selectedProjectId) ?? sideProjects[0];
@@ -631,7 +691,7 @@ export default function CleanLinePortfolio() {
           id="credentials"
           index={1}
           title="Credentials"
-          desc="클라우드 네이티브, 리눅스, 데이터, 네트워크 기본기를 자격증으로 보완했습니다. CKA, AWS, Linux는 Backend/DevOps 방향성을 먼저 보여주는 신호로 배치했습니다."
+          desc="클라우드 네이티브, 리눅스, 데이터, 네트워크 기본기를 자격증으로 보완했습니다. 실제 자격증 배지 이미지는 Credly나 발급기관 링크에서 확인하도록 두고, 화면에서는 대중적으로 인식 가능한 대표 기술 마크를 사용했습니다."
         >
           <div className="grid border-l border-t border-black md:grid-cols-2 xl:grid-cols-3">
             {credentials.map((credential) => (
