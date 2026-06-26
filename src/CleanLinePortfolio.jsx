@@ -10,7 +10,43 @@ const navItems = [
   { id: "contact", label: "Contact" },
 ];
 
-const domains = ["Tax", "Law", "Video", "AI"];
+const domains = ["MSA", "Video Streaming", "TAX"];
+
+const profileLinks = [
+  {
+    label: "GitHub",
+    href: "https://github.com/hyunmyungchoi",
+    logo: "https://cdn.simpleicons.org/github/000000",
+    fallback: "GH",
+  },
+  {
+    label: "Velog",
+    href: "https://velog.io/@hyunmyungchoi/posts",
+    logo: "https://cdn.simpleicons.org/velog/20C997",
+    fallback: "VE",
+  },
+];
+
+const contactLinks = [
+  {
+    label: "GitHub",
+    href: "https://github.com/hyunmyungchoi",
+    logo: "https://cdn.simpleicons.org/github/000000",
+    fallback: "GH",
+  },
+  {
+    label: "Velog",
+    href: "https://velog.io/@hyunmyungchoi/posts",
+    logo: "https://cdn.simpleicons.org/velog/20C997",
+    fallback: "VE",
+  },
+  {
+    label: "Resume PDF",
+    href: "#",
+    logo: "https://cdn.simpleicons.org/readthedocs/000000",
+    fallback: "PDF",
+  },
+];
 
 const credentials = [
   {
@@ -131,7 +167,7 @@ const approaches = [
   ],
   [
     "05",
-    "AI-assisted Workflow",
+    "AI 기반 개발 보조",
     "Codex, GPT, Gemini를 활용해 코드 초안, 리팩터링, 오류 분석, 문서 정리를 보조하고, 함수와 이벤트에는 의도 주석을 남겨 수정 가능성을 높입니다.",
   ],
 ];
@@ -163,7 +199,7 @@ const sideProjects = [
       "BFF Session / Redis Session 테스트",
       "Resource Server JWT 검증 테스트",
       "Gateway Routing 테스트",
-      "Postman Collection 기반 API 흐름 확인",
+      "PowerShell Invoke-RestMethod 기반 API 흐름 확인",
     ],
     evidence: profileLinks,
   },
@@ -209,41 +245,6 @@ const archives = [
 ];
 
 
-const profileLinks = [
-  {
-    label: "GitHub",
-    href: "https://github.com/hyunmyungchoi",
-    logo: "https://cdn.simpleicons.org/github/000000",
-    fallback: "GH",
-  },
-  {
-    label: "Velog",
-    href: "https://velog.io/@hyunmyungchoi/posts",
-    logo: "https://cdn.simpleicons.org/velog/20C997",
-    fallback: "VE",
-  },
-];
-
-const contactLinks = [
-  {
-    label: "GitHub",
-    href: "https://github.com/hyunmyungchoi",
-    logo: "https://cdn.simpleicons.org/github/000000",
-    fallback: "GH",
-  },
-  {
-    label: "Velog",
-    href: "https://velog.io/@hyunmyungchoi/posts",
-    logo: "https://cdn.simpleicons.org/velog/20C997",
-    fallback: "VE",
-  },
-  {
-    label: "Resume PDF",
-    href: "#",
-    logo: "https://cdn.simpleicons.org/readthedocs/000000",
-    fallback: "PDF",
-  },
-];
 
 function Section({ id, index, title, desc, children }) {
   return (
@@ -456,14 +457,17 @@ function IntroGate({ onEnter }) {
               ))}
             </div>
 
-            <h1 className="max-w-4xl text-4xl font-black leading-[1.08] tracking-[-0.07em] md:text-6xl">
-              백엔드와 프론트엔드 구현 경험을 바탕으로,
-              <br />
-              운영과 인프라까지 시야를 넓히고 있습니다.
+            <h1 className="max-w-4xl text-4xl font-black leading-[1.08] tracking-[-0.07em] md:text-4xl">
+              <span className="block">
+                백엔드와 프론트엔드 구현 경험을 바탕으로,
+              </span>
+              <span className="mt-3 block">
+                운영과 인프라까지 시야를 넓히고 있습니다.
+              </span>
             </h1>
 
             <p className="mt-10 max-w-2xl text-lg leading-9 text-neutral-600">
-              SI 실무에서 업무 흐름, 화면, API, 데이터 처리, 운영 로그를 함께 다루며 시스템이 동작하는 흐름을 익혔습니다.
+              SI 실무에서 업무 흐름, 화면, API, 데이터 처리,<br /> 운영 로그를 함께 다루며 시스템이 동작하는 흐름을 익혔습니다.
               <br />
               이제는 그 경험을 클라우드, DevOps, 인프라 운영 관점으로 확장하고 있습니다.
             </p>
@@ -840,7 +844,7 @@ export default function CleanLinePortfolio() {
                   <a
                       key={item}
                       href="#"
-                      className={`group flex items-center justify-between gap-6 py-5 text-sm font-medium transition-all hover:bg-black hover:px-4 hover:text-white ${idx >= 2 ? "border-t border-black" : ""} ${idx % 2 === 1 ? "md:border-l md:border-black" : ""}`}
+                      className={`group flex items-center justify-between gap-6 py-5 text-sm font-medium transition-all hover:bg-black hover:px-4 hover:text-white ${idx >= 2 ? "border-t border-black" : ""} ${idx % 2 === 1 ? "md:border-l md:border-black" : ""}`}className={`group flex items-center justify-between gap-6 px-4 py-5 text-sm font-medium transition-all hover:bg-black hover:text-white ${idx >= 2 ? "border-t border-black" : ""} ${idx % 2 === 1 ? "md:border-l md:border-black" : ""}`}
                   >
                     <span>{item}</span>
                     <span className="transition group-hover:translate-x-1">→</span>
