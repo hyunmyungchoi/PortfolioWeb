@@ -6,11 +6,12 @@ const navItems = [
   { id: "work", label: "Work" },
   { id: "approach", label: "Approach" },
   { id: "side-projects", label: "Side Projects" },
+  { id: "deployment", label: "Deployment" },
   { id: "archive", label: "Archive" },
   { id: "contact", label: "Contact" },
 ];
 
-const domains = ["MSA", "Video Streaming", "TAX"];
+const domains = ["MSA", "Cloud", "DevOps"];
 
 const springMsaLinks = [
   {
@@ -96,7 +97,10 @@ const credentials = [
 
 const skills = [
   { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", fallback: "JAVA" },
-  { name: "Spring", logo: "https://cdn.simpleicons.org/spring/6DB33F", fallback: "SP" },
+  { name: "Spring Boot", logo: "https://cdn.simpleicons.org/spring/6DB33F", fallback: "SB" },
+  { name: "Spring Security", logo: "https://cdn.simpleicons.org/spring/6DB33F", fallback: "SEC" },
+  { name: "Spring Authorization Server", logo: "https://cdn.simpleicons.org/spring/6DB33F", fallback: "AUTH" },
+  { name: "Spring OAuth2/OIDC", logo: "https://cdn.simpleicons.org/spring/6DB33F", fallback: "OIDC" },
   { name: "BFF Pattern", logo: "https://cdn.simpleicons.org/jsonwebtokens/000000", fallback: "BFF" },
   { name: "React", logo: "https://cdn.simpleicons.org/react/61DAFB", fallback: "R" },
   { name: "TypeScript", logo: "https://cdn.simpleicons.org/typescript/3178C6", fallback: "TS" },
@@ -106,6 +110,10 @@ const skills = [
   { name: "Kafka", logo: "https://cdn.simpleicons.org/apachekafka/231F20", fallback: "K" },
   { name: "Docker", logo: "https://cdn.simpleicons.org/docker/2496ED", fallback: "DO" },
   { name: "Kubernetes", logo: "https://cdn.simpleicons.org/kubernetes/326CE5", fallback: "K8S" },
+  { name: "AWS", logo: "https://cdn.simpleicons.org/amazonwebservices/232F3E", fallback: "AWS" },
+  { name: "GitHub Actions", logo: "https://cdn.simpleicons.org/githubactions/2088FF", fallback: "CI" },
+  { name: "Argo CD", logo: "https://cdn.simpleicons.org/argo/EF7B4D", fallback: "CD" },
+  { name: "Nginx", logo: "https://cdn.simpleicons.org/nginx/009639", fallback: "NX" },
   { name: "Kibana", logo: "https://cdn.simpleicons.org/kibana/005571", fallback: "LOG" },
   { name: "WebRTC", logo: "https://cdn.simpleicons.org/webrtc/333333", fallback: "RTC" },
   { name: "FFmpeg", logo: "https://cdn.simpleicons.org/ffmpeg/007808", fallback: "FF" },
@@ -177,9 +185,8 @@ const sideProjects = [
     id: "spring-msa",
     title: "Spring MSA Platform",
     oneLine: "실무에서 경험한 구조적 문제를 Spring 기반 서비스 분리 구조로 다시 정리한 프로젝트",
-    desc: "프론트엔드 독립 빌드, 세션 관리, 권한 분리, 외부 인터페이스 테스트, 대시보드 집계 문제를 Gateway, BFF, Authorization Server, Redis Session, 도메인 서비스 분리 관점으로 다시 설계했습니다. Docker 기반 로컬 실행 환경을 먼저 구성하고, 이후 컨테이너 운영 구조로 확장할 수 있도록 학습하며 적용 방향을 잡고 있습니다.",
-    stack: "Spring Boot · Spring Security · Authorization Server · Gateway · BFF · Redis · PostgreSQL · React · Docker",
-    status: "MVP / Docker-based Lab",
+    desc: "프론트엔드 독립 빌드, 세션 관리, 권한 분리, 외부 인터페이스 테스트, 대시보드 집계 문제를 Gateway, BFF, Authorization Server, Redis Session, 도메인 서비스 분리 관점으로 다시 설계했습니다. Docker Compose 기반 로컬 실행 환경에서 시작해 GitHub Actions, Kubernetes, Argo CD, AWS 배포 구조로 확장하며 애플리케이션이 실제 운영 환경에 올라가는 흐름까지 검증하는 방향으로 발전시키고 있습니다.",    stack: "Spring Boot · Spring Security · Authorization Server · Gateway · BFF · Redis · PostgreSQL · React · Docker",
+    status: "MSA / CI-CD / Kubernetes Lab",
     architecture: [
       "Public Gateway / Admin Gateway로 사용자 채널과 관리자 채널 분리",
       "Business BFF / Admin BFF에서 브라우저 토큰 저장 없이 Redis Session 기반 인증 상태 관리",
@@ -218,11 +225,14 @@ const sideProjects = [
       "Redis로 현재 방송 상태, 시청자 수, 방 세션, 채팅 제한, 토큰/세션 정보 관리",
     ],
     implemented: [
-      "OBS RTMP 송출과 nginx-rtmp 수신 성공",
-      "FFmpeg 컨테이너 기반 HLS/DASH 변환 파이프라인 구현",
-      "Shaka Player 기반 DASH/HLS 브라우저 재생 구현",
-      "WebSocket 채팅과 WebRTC Signaling API 구현",
-      "Docker Compose 기반 로컬 스트리밍 MVP 실행 환경 구성",
+      "Gateway → BFF → Authorization Server → Resource Server 인증 흐름 구현",
+      "Redis Session Store, Refresh Token/ID Token 서버 측 저장 구조 적용",
+      "Business/Admin 채널 분리와 ROLE_USER / ROLE_ADMIN 접근 경계 구성",
+      "Docker Compose 기반 로컬 실행 환경 구성",
+      "GitHub Actions 기반 Build / Test / Docker Image Build 파이프라인 구성 예정",
+      "Kubernetes 배포 매니페스트와 Argo CD GitOps 배포 흐름 확장 예정",
+      "Argo CD를 활용한 GitOps 배포 흐름과 OutOfSync / Sync 반영 과정 검증",
+      "API 문서와 실행 가이드 정리",
     ],
     tests: [
       "RTMP 송출 → HLS/DASH 재생 시나리오 테스트",
@@ -489,9 +499,9 @@ function IntroGate({ onEnter }) {
 
             <div className="mt-16 grid border-y border-black md:grid-cols-3">
               {[
-                ["Role", "Backend / Frontend"],
-                ["View", "System Flow / Structure"],
-                ["Track", "MSA / Video / AI"],
+                ["Role", "Backend / DevOps-oriented"],
+                ["View", "Application / Deploy / Operation"],
+                ["Track", "MSA / Cloud / DevOps"],
               ].map(([k, v], index) => (
                   <div
                       key={k}
@@ -783,7 +793,7 @@ export default function CleanLinePortfolio() {
               id="side-projects"
               index={5}
               title="Side Projects"
-              desc="실무에서 느낀 구조적 한계를 MSA 서비스와 Video Streaming 서비스 안에서 다시 설계하고 구현합니다."
+              desc="실무에서 경험한 구조적 문제를 Spring MSA와 Video Streaming 프로젝트로 재설계하고, Docker, CI/CD, Kubernetes, AWS 배포 구조까지 확장해 애플리케이션이 운영되는 흐름을 함께 검증합니다."
           >
             <div className="grid border-y border-black lg:grid-cols-2">
               {sideProjects.map((project, idx) => {
@@ -856,10 +866,50 @@ export default function CleanLinePortfolio() {
               </div>
             </div>
           </Section>
-
+          <Section
+              id="deployment"
+              index={6}
+              title="Cloud Deployment"
+              desc="PortfolioWeb을 AWS 기반 정적 웹 서비스로 배포하고, 빌드 산출물, 배포 경로, 도메인 접근, 캐시 정책까지 정리하여 누구나 접속 가능한 포트폴리오 형태로 운영합니다."
+          >
+            <div className="grid border-y border-black lg:grid-cols-3">
+              {[
+                [
+                  "Hosting",
+                  "AWS S3 / CloudFront",
+                  "Vite 빌드 산출물을 S3에 업로드하고 CloudFront를 통해 전역 캐시 기반으로 제공합니다.",
+                ],
+                [
+                  "Delivery",
+                  "GitHub Actions",
+                  "master 브랜치 push 시 build 후 S3 sync 및 CloudFront invalidation을 수행하는 배포 흐름으로 확장합니다.",
+                ],
+                [
+                  "Access",
+                  "HTTPS / Public Access",
+                  "CloudFront HTTPS 엔드포인트를 통해 누구나 접근 가능한 포트폴리오 웹으로 운영합니다.",
+                ],
+              ].map(([title, role, desc], idx) => (
+                  <article
+                      key={title}
+                      className={`p-6 ${idx !== 0 ? "border-t border-black lg:border-l lg:border-t-0" : ""}`}
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
+                      {role}
+                    </p>
+                    <h3 className="mt-5 text-2xl font-semibold tracking-[-0.04em]">
+                      {title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-neutral-600">
+                      {desc}
+                    </p>
+                  </article>
+              ))}
+            </div>
+          </Section>
           <Section
               id="archive"
-              index={6}
+              index={7}
               title="Archive"
               desc="블로그는 기술 사용 목록이 아니라, 문제 해결 과정과 의사결정 기록으로 보여줍니다."
           >
@@ -879,7 +929,7 @@ export default function CleanLinePortfolio() {
 
           <Section
               id="contact"
-              index={7}
+              index={8}
               title="Contact"
               desc="깃허브, 기술 기록, 이력서 링크만 간단히 정리했습니다."
           >
