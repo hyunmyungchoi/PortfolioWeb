@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 const navItems = [
-  { id: "home", label: "Home" },
   { id: "credentials", label: "Credentials" },
   { id: "skills", label: "Skills" },
   { id: "work", label: "Work" },
@@ -11,39 +10,9 @@ const navItems = [
   { id: "contact", label: "Contact" },
 ];
 
-const domains = ["Tax", "Law", "Video"];
+const domains = ["Tax", "Law", "Video", "AI"];
 
 const credentials = [
-  {
-    code: "CKA",
-    title: "Certified Kubernetes Administrator",
-    issuer: "Cloud Native Computing Foundation",
-    desc: "Kubernetes 운영, 워크로드, 네트워킹, 스토리지, 트러블슈팅 기본기",
-    focus: "Kubernetes / Cloud Native",
-    logo: "https://cdn.simpleicons.org/kubernetes/326CE5",
-    fallback: "K8S",
-    weight: "major",
-  },
-  {
-    code: "AWS CCP",
-    title: "AWS Certified Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    desc: "AWS 클라우드 기본 개념, 주요 서비스, 보안, 과금 구조 이해",
-    focus: "AWS Cloud Foundation",
-    logo: "/aws.jpg",
-    fallback: "AWS",
-    weight: "major",
-  },
-  {
-    code: "Linux 1",
-    title: "리눅스마스터 1급",
-    issuer: "Linux System Administration",
-    desc: "Linux 시스템 운영, 쉘 환경, 네트워크/서비스 관리 기본기",
-    focus: "Linux / Infra Operation",
-    logo: "/Linux.png",
-    fallback: "LINUX",
-    weight: "major",
-  },
   {
     code: "SQLD",
     title: "SQL Developer",
@@ -72,6 +41,16 @@ const credentials = [
     focus: "TCP/IP / Network",
     logo: "/icqa.png",
     fallback: "NET",
+    weight: "normal",
+  },
+  {
+    code: "정보처리",
+    title: "정보처리기능사",
+    issuer: "한국산업인력공단",
+    desc: "소프트웨어 개발, 데이터베이스, 업무 시스템 구현에 필요한 기본기를 보완",
+    focus: "Software / CS Foundation",
+    logo: "/hrdkorea.png",
+    fallback: "IT",
     weight: "normal",
   },
 ];
@@ -129,6 +108,11 @@ const approaches = [
     "04",
     "Operation & Documentation",
     "운영 이슈는 Kibana 로그, Trace ID, DB 상태를 함께 확인하고 원인과 조치 내용을 문서화합니다.",
+  ],
+  [
+    "05",
+    "AI-assisted Development",
+    "Codex, GPT, Gemini를 활용해 코드 초안 작성, 리팩토링 방향 검토, 문서 정리, 구현 아이디어 비교를 빠르게 검증합니다.",
   ],
 ];
 
@@ -193,36 +177,6 @@ const sideProjects = [
     ],
     evidence: ["GitHub", "README", "Demo Video", "Architecture", "Troubleshooting"],
   },
-  {
-    id: "money-book",
-    title: "Money Book Service",
-    oneLine: "실제 서비스 운영 경험을 목표로 만든 AI 기반 웹/앱 가계부",
-    desc: "구매 문자와 결제 알림 내용을 AI로 분석해 금액, 카테고리, 거래 정보를 추정하고 자동 등록하는 기능을 적용했습니다. 빠른 개발, 실제 배포, 사용자 입력 흐름 개선을 중심으로 만든 서비스형 프로젝트입니다.",
-    stack: "React · Mobile/Web · Spring Boot · AI Parsing · PostgreSQL · Deployment",
-    status: "Released Service / AI Feature",
-    architecture: [
-      "웹/앱 클라이언트에서 수동 거래 등록과 AI 문자 분석 등록을 함께 지원",
-      "Spring Boot API에서 거래, 카테고리, 예산, 월별 리포트 도메인 처리",
-      "AI Parsing Layer에서 구매 문자/결제 알림을 분석해 금액, 상호명, 카테고리 추정",
-      "PostgreSQL에 거래 내역과 AI 추정 결과, 사용자 수정 이력을 분리 저장",
-      "배포 환경에서 사용자 피드백을 반영해 카테고리 추천 규칙 개선",
-    ],
-    implemented: [
-      "거래 등록, 카테고리 관리, 월별 지출 조회 구현",
-      "구매 문자 AI 분석과 자동 거래 등록 플로우 구현",
-      "사용자 수정 이력을 기반으로 카테고리 추천 개선 구조 적용",
-      "웹 배포와 모바일 대응 UI 구성",
-      "서비스 운영용 로그와 오류 추적 기본 구조 구성",
-    ],
-    tests: [
-      "문자 분석 샘플 데이터 테스트",
-      "거래 등록/수정/삭제 API 테스트",
-      "월별 리포트 집계 테스트",
-      "AI 추정 실패 시 수동 입력 fallback 테스트",
-      "배포 체크리스트와 사용자 시나리오 문서 작성",
-    ],
-    evidence: ["GitHub", "Service URL", "README", "Demo", "User Flow"],
-  },
 ];
 
 const archives = [
@@ -236,32 +190,32 @@ const archives = [
 
 function Section({ id, index, title, desc, children }) {
   return (
-    <section id={id} className="scroll-mt-24 border-t border-black py-20 md:py-28">
-      <div className="grid gap-8 xl:grid-cols-[180px_1fr]">
-        <div className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
-          {String(index).padStart(2, "0")} / {id}
+      <section id={id} className="scroll-mt-24 border-t border-black py-20 md:py-28">
+        <div className="grid gap-8 xl:grid-cols-[180px_1fr]">
+          <div className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
+            {String(index).padStart(2, "0")} / {id}
+          </div>
+          <div>
+            <h2 className="reveal-text text-4xl font-semibold tracking-[-0.05em] text-black md:text-6xl">
+              {title}
+            </h2>
+            {desc && <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-600">{desc}</p>}
+            <div className="mt-12">{children}</div>
+          </div>
         </div>
-        <div>
-          <h2 className="reveal-text text-4xl font-semibold tracking-[-0.05em] text-black md:text-6xl">
-            {title}
-          </h2>
-          {desc && <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-600">{desc}</p>}
-          <div className="mt-12">{children}</div>
-        </div>
-      </div>
-    </section>
+      </section>
   );
 }
 
 function LineButton({ children, href = "#" }) {
   return (
-    <a
-      href={href}
-      className="group inline-flex items-center gap-3 border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
-    >
-      {children}
-      <span className="transition group-hover:translate-x-1">→</span>
-    </a>
+      <a
+          href={href}
+          className="group inline-flex items-center gap-3 border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
+      >
+        {children}
+        <span className="transition group-hover:translate-x-1">→</span>
+      </a>
   );
 }
 
@@ -269,18 +223,18 @@ function SkillBadge({ logo, fallback, name }) {
   const [failed, setFailed] = useState(false);
 
   return (
-    <span className="group inline-flex items-center border border-black text-sm font-medium transition hover:-translate-y-1 hover:bg-black hover:text-white">
+      <span className="group inline-flex items-center border border-black text-sm font-medium transition hover:-translate-y-1 hover:bg-black hover:text-white">
       <span className="grid h-12 min-w-12 place-items-center border-r border-black bg-white px-3 group-hover:border-white">
         {!failed ? (
-          <img
-            src={logo}
-            alt={`${name} logo`}
-            className="h-6 w-6 object-contain transition group-hover:scale-110"
-            loading="lazy"
-            onError={() => setFailed(true)}
-          />
+            <img
+                src={logo}
+                alt={`${name} logo`}
+                className="h-6 w-6 object-contain transition group-hover:scale-110"
+                loading="lazy"
+                onError={() => setFailed(true)}
+            />
         ) : (
-          <span className="text-[10px] font-bold uppercase tracking-[-0.04em] text-black group-hover:text-white">
+            <span className="text-[10px] font-bold uppercase tracking-[-0.04em] text-black group-hover:text-white">
             {fallback}
           </span>
         )}
@@ -294,21 +248,21 @@ function CredentialLogo({ logo, fallback, title }) {
   const [failed, setFailed] = useState(false);
 
   return (
-    <div className="grid h-20 w-20 place-items-center border border-black bg-white transition group-hover:rotate-[-2deg] group-hover:scale-105">
-      {!failed ? (
-        <img
-          src={logo}
-          alt={`${title} mark`}
-          className="h-12 w-12 object-contain"
-          loading="lazy"
-          onError={() => setFailed(true)}
-        />
-      ) : (
-        <span className="text-xs font-black uppercase tracking-[-0.04em] text-black">
+      <div className="grid h-20 w-20 place-items-center border border-black bg-white transition group-hover:rotate-[-2deg] group-hover:scale-105">
+        {!failed ? (
+            <img
+                src={logo}
+                alt={`${title} mark`}
+                className="h-12 w-12 object-contain"
+                loading="lazy"
+                onError={() => setFailed(true)}
+            />
+        ) : (
+            <span className="text-xs font-black uppercase tracking-[-0.04em] text-black">
           {fallback}
         </span>
-      )}
-    </div>
+        )}
+      </div>
   );
 }
 
@@ -316,67 +270,67 @@ function CredentialCard({ credential }) {
   const isMajor = credential.weight === "major";
 
   return (
-    <article
-      className={`group relative overflow-hidden border-b border-r border-black bg-white p-7 transition duration-200 hover:-translate-y-1 hover:bg-black hover:text-white ${
-        isMajor ? "min-h-[300px]" : "min-h-[240px]"
-      }`}
-    >
-      <div className="absolute right-5 top-5 text-[11px] font-black uppercase tracking-[0.22em] text-neutral-300 transition group-hover:text-white/30">
-        {credential.focus}
-      </div>
+      <article
+          className={`group relative overflow-hidden border-b border-r border-black bg-white p-7 transition duration-200 hover:-translate-y-1 hover:bg-black hover:text-white ${
+              isMajor ? "min-h-[300px]" : "min-h-[240px]"
+          }`}
+      >
+        <div className="absolute right-5 top-5 text-[11px] font-black uppercase tracking-[0.22em] text-neutral-300 transition group-hover:text-white/30">
+          {credential.focus}
+        </div>
 
-      <CredentialLogo
-        logo={credential.logo}
-        fallback={credential.fallback}
-        title={credential.title}
-      />
+        <CredentialLogo
+            logo={credential.logo}
+            fallback={credential.fallback}
+            title={credential.title}
+        />
 
-      <div className="mt-7 flex flex-wrap items-center gap-2">
+        <div className="mt-7 flex flex-wrap items-center gap-2">
         <span className="inline-flex border border-current px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
           {credential.code}
         </span>
-        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 group-hover:text-white/60">
+          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 group-hover:text-white/60">
           {credential.issuer}
         </span>
-      </div>
+        </div>
 
-      <h3 className={`${isMajor ? "mt-7 text-3xl" : "mt-6 text-2xl"} font-semibold leading-tight tracking-[-0.05em]`}>
-        {credential.title}
-      </h3>
+        <h3 className={`${isMajor ? "mt-7 text-3xl" : "mt-6 text-2xl"} font-semibold leading-tight tracking-[-0.05em]`}>
+          {credential.title}
+        </h3>
 
-      <p className="mt-5 text-sm leading-7 text-neutral-600 transition group-hover:text-white/70">
-        {credential.desc}
-      </p>
-    </article>
+        <p className="mt-5 text-sm leading-7 text-neutral-600 transition group-hover:text-white/70">
+          {credential.desc}
+        </p>
+      </article>
   );
 }
 
 function DetailBlock({ title, items }) {
   return (
-    <div className="border-t border-black pt-5">
-      <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500">{title}</p>
-      <ul className="space-y-3">
-        {items.map((item) => (
-          <li key={item} className="flex gap-3 text-sm leading-7 text-neutral-600">
-            <span className="mt-[11px] h-1.5 w-1.5 shrink-0 bg-black" />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+      <div className="border-t border-black pt-5">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500">{title}</p>
+        <ul className="space-y-3">
+          {items.map((item) => (
+              <li key={item} className="flex gap-3 text-sm leading-7 text-neutral-600">
+                <span className="mt-[11px] h-1.5 w-1.5 shrink-0 bg-black" />
+                <span>{item}</span>
+              </li>
+          ))}
+        </ul>
+      </div>
   );
 }
 
 function IntroGate({ onEnter }) {
   return (
-    <main
-      className="min-h-screen bg-white text-black"
-      style={{
-        fontFamily:
-          "'Noto Sans KR', 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif",
-      }}
-    >
-      <style>{`
+      <main
+          className="min-h-screen bg-white text-black"
+          style={{
+            fontFamily:
+                "'Noto Sans KR', 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif",
+          }}
+      >
+        <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
 
         @keyframes introImage {
@@ -410,136 +364,160 @@ function IntroGate({ onEnter }) {
         }
       `}</style>
 
-      <section className="grid min-h-screen grid-cols-1 border-black lg:grid-cols-[1fr_1.1fr]">
-        <div className="relative flex items-center justify-center border-b border-black p-6 lg:border-b-0 lg:border-r">
-          <div className="intro-image relative w-full max-w-[520px] overflow-hidden border border-black bg-white">
-            <img
-              src="/profile.jpg"
-              alt="Profile"
-              className="aspect-[4/5] w-full object-cover"
-            />
+        <section className="grid min-h-screen grid-cols-1 border-black lg:grid-cols-[1fr_1.1fr]">
+          <div className="relative flex items-center justify-center border-b border-black p-6 lg:border-b-0 lg:border-r">
+            <div className="intro-image relative w-full max-w-[520px] overflow-hidden border border-black bg-white">
+              <img
+                  src="/profile.jpg"
+                  alt="Profile"
+                  className="aspect-[4/5] w-full object-cover"
+              />
 
-            <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
-              Backend / DevOps
-            </div>
+              <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+                Backend / DevOps
+              </div>
 
-            <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
-              Portfolio.exe
+              <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+                Portfolio.exe
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="intro-text flex flex-col justify-center px-6 py-16 lg:px-16">
-          <p className="mb-8 text-xs font-bold uppercase tracking-[0.28em] text-neutral-500">
-            CHOI.DEV / First Impression
-          </p>
+          <div className="intro-text flex flex-col justify-center px-6 py-16 lg:px-16">
+            <p className="mb-8 text-xs font-bold uppercase tracking-[0.28em] text-neutral-500">
+              CHOI.DEV / First Impression
+            </p>
 
-          <h1 className="max-w-4xl text-6xl font-black leading-[0.98] tracking-[-0.08em] md:text-8xl">
-            졸라
-            <br />
-            궁금한가요?
-          </h1>
+            <div className="mb-8 flex flex-wrap gap-2">
+              {domains.map((domain) => (
+                  <span key={domain} className="border border-black px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]">
+                {domain}
+              </span>
+              ))}
+            </div>
 
-          <p className="mt-10 max-w-2xl text-lg leading-9 text-neutral-600">
-            사진은 장난인데,
-            <br />
-            포트폴리오는 생각보다 진지합니다.
-            <br />
-            제가 뭘 만들고, 어디까지 해봤고, 왜 자꾸 구조를 바꾸려는지 보여드리겠습니다.
-          </p>
+            <h1 className="max-w-4xl text-6xl font-black leading-[0.98] tracking-[-0.08em] md:text-8xl">
+              문제를 고치는 데서 끝내지 않고,
+              <br />
+              반복되는 구조를 바꿉니다.
+            </h1>
 
-          <div className="mt-12 flex flex-wrap gap-3">
-            <button
-              type="button"
-              onClick={onEnter}
-              className="group border border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:-translate-y-1"
-            >
-              포트폴리오 보기
-              <span className="ml-3 inline-block transition group-hover:translate-x-1">
+            <p className="mt-10 max-w-2xl text-lg leading-9 text-neutral-600">
+              SI 실무에서 마주한 업무 시스템의 문제를 Java/Spring, React, DB, 운영 로그 관점으로 연결해 해결했습니다.
+              <br />
+              그리고 그 경험을 Spring MSA, Video Streaming, AI 활용 방식으로 확장하고 있습니다.
+            </p>
+
+            <div className="mt-12 flex flex-wrap gap-3">
+              <button
+                  type="button"
+                  onClick={() => onEnter("credentials")}
+                  className="group border border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:-translate-y-1"
+              >
+                자격·기술 보기
+                <span className="ml-3 inline-block transition group-hover:translate-x-1">
                 →
               </span>
-            </button>
+              </button>
 
-            <button
-              type="button"
-              onClick={onEnter}
-              className="border border-black bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:-translate-y-1 hover:bg-black hover:text-white"
-            >
-              일단 눌러보셈
-            </button>
-          </div>
-
-          <div className="mt-16 grid border-y border-black md:grid-cols-3">
-            {[
-              ["Role", "Backend"],
-              ["Cloud", "CKA / AWS"],
-              ["Track", "MSA / Video / AI"],
-            ].map(([k, v], index) => (
-              <div
-                key={k}
-                className={`py-5 md:px-5 ${index !== 0 ? "md:border-l md:border-black" : ""}`}
+              <button
+                  type="button"
+                  onClick={() => onEnter("side-projects")}
+                  className="border border-black bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:-translate-y-1 hover:bg-black hover:text-white"
               >
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-neutral-500">
-                  {k}
-                </p>
-                <p className="mt-2 text-base font-bold tracking-[-0.04em]">
-                  {v}
-                </p>
-              </div>
-            ))}
+                프로젝트 바로 보기
+              </button>
+            </div>
+
+            <div className="mt-16 grid border-y border-black md:grid-cols-3">
+              {[
+                ["Role", "Backend / DevOps"],
+                ["Track", "MSA / Video / AI"],
+                ["Credential", "SQLD / ADsP / Network / IT"],
+              ].map(([k, v], index) => (
+                  <div
+                      key={k}
+                      className={`py-5 md:px-5 ${index !== 0 ? "md:border-l md:border-black" : ""}`}
+                  >
+                    <p className="text-xs font-bold uppercase tracking-[0.22em] text-neutral-500">
+                      {k}
+                    </p>
+                    <p className="mt-2 text-base font-bold tracking-[-0.04em]">
+                      {v}
+                    </p>
+                  </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
   );
 }
 
 export default function CleanLinePortfolio() {
   const [entered, setEntered] = useState(false);
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState("credentials");
   const [selectedProjectId, setSelectedProjectId] = useState(sideProjects[0].id);
+
+  const handleEnter = (targetId = "credentials") => {
+    setEntered(true);
+    setActive(targetId);
+
+    window.setTimeout(() => {
+      document.getElementById(targetId)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 0);
+  };
+
+  const handleBackToIntro = () => {
+    setEntered(false);
+    setActive("credentials");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
     if (!entered) return;
 
     const sections = navItems
-      .map((item) => document.getElementById(item.id))
-      .filter(Boolean);
+        .map((item) => document.getElementById(item.id))
+        .filter(Boolean);
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        (entries) => {
+          const visible = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-        if (visible?.target?.id) {
-          setActive(visible.target.id);
+          if (visible?.target?.id) {
+            setActive(visible.target.id);
+          }
+        },
+        {
+          root: null,
+          rootMargin: "-25% 0px -55% 0px",
+          threshold: [0.15, 0.3, 0.5],
         }
-      },
-      {
-        root: null,
-        rootMargin: "-25% 0px -55% 0px",
-        threshold: [0.15, 0.3, 0.5],
-      }
     );
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, [entered]);
 
-  const activeLabel = navItems.find((item) => item.id === active)?.label ?? "Home";
+  const activeLabel = navItems.find((item) => item.id === active)?.label ?? "Credentials";
   const selectedProject = sideProjects.find((project) => project.id === selectedProjectId) ?? sideProjects[0];
 
   if (!entered) {
-    return <IntroGate onEnter={() => setEntered(true)} />;
+    return <IntroGate onEnter={handleEnter} />;
   }
 
   return (
-    <main
-      className="min-h-screen bg-white text-black"
-      style={{ fontFamily: "'Noto Sans KR', 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" }}
-    >
-      <style>{`
+      <main
+          className="min-h-screen bg-white text-black"
+          style={{ fontFamily: "'Noto Sans KR', 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" }}
+      >
+        <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
 
         html {
@@ -591,268 +569,235 @@ export default function CleanLinePortfolio() {
         }
       `}</style>
 
-      <div className="fixed left-0 top-0 z-50 hidden h-screen w-[260px] border-r border-black bg-white px-7 py-8 lg:block">
-        <a href="#home" className="block text-lg font-bold tracking-[-0.06em]">
-          CHOI.DEV
-        </a>
-        <p className="mt-4 max-w-[190px] text-xs leading-6 text-neutral-500">
-          Backend developer who turns repeated problems into maintainable structures.
-        </p>
-
-        <nav className="mt-16 space-y-5">
-          {navItems.map((item, index) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={() => setActive(item.id)}
-              className="group grid grid-cols-[32px_1fr] items-center gap-3"
-            >
-              <span className={`text-xs font-semibold transition ${active === item.id ? "text-black" : "text-neutral-300 group-hover:text-black"}`}>
-                {String(index).padStart(2, "0")}
-              </span>
-              <span className={`border-b py-2 text-xs font-semibold uppercase tracking-[0.18em] transition ${
-                active === item.id
-                  ? "border-black text-black"
-                  : "border-neutral-200 text-neutral-400 group-hover:border-black group-hover:text-black"
-              }`}>
-                {item.label}
-              </span>
-            </a>
-          ))}
-        </nav>
-
-        <div className="absolute bottom-8 left-7 right-7 border-t border-black pt-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-400">Current</p>
-          <p className="mt-2 text-sm font-semibold tracking-[-0.04em]">{activeLabel}</p>
-        </div>
-      </div>
-
-      <header className="sticky top-0 z-50 border-b border-black bg-white/90 backdrop-blur lg:hidden">
-        <div className="flex items-center justify-between px-5 py-5">
-          <a href="#home" onClick={() => setActive("home")} className="text-sm font-bold tracking-[-0.04em]">
+        <div className="fixed left-0 top-0 z-50 hidden h-screen w-[260px] border-r border-black bg-white px-7 py-8 lg:block">
+          <a href="#credentials" className="block text-lg font-bold tracking-[-0.06em]">
             CHOI.DEV
           </a>
-          <span className="text-xs font-semibold uppercase tracking-[0.22em]">{activeLabel}</span>
+          <p className="mt-4 max-w-[190px] text-xs leading-6 text-neutral-500">
+            Backend developer who turns repeated problems into maintainable structures.
+          </p>
+
+          <button
+              type="button"
+              onClick={handleBackToIntro}
+              className="mt-6 border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
+          >
+            ← Back to intro
+          </button>
+
+          <nav className="mt-16 space-y-5">
+            {navItems.map((item, index) => (
+                <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    onClick={() => setActive(item.id)}
+                    className="group grid grid-cols-[32px_1fr] items-center gap-3"
+                >
+              <span className={`text-xs font-semibold transition ${active === item.id ? "text-black" : "text-neutral-300 group-hover:text-black"}`}>
+                {String(index + 1).padStart(2, "0")}
+              </span>
+                  <span className={`border-b py-2 text-xs font-semibold uppercase tracking-[0.18em] transition ${
+                      active === item.id
+                          ? "border-black text-black"
+                          : "border-neutral-200 text-neutral-400 group-hover:border-black group-hover:text-black"
+                  }`}>
+                {item.label}
+              </span>
+                </a>
+            ))}
+          </nav>
+
+          <div className="absolute bottom-8 left-7 right-7 border-t border-black pt-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-400">Current</p>
+            <p className="mt-2 text-sm font-semibold tracking-[-0.04em]">{activeLabel}</p>
+          </div>
         </div>
-      </header>
 
-      <div className="mx-auto max-w-7xl px-5 lg:ml-[260px] lg:max-w-none lg:px-12 xl:px-16">
-        <section id="home" className="min-h-[calc(100vh-73px)] scroll-mt-24 py-20 md:py-28">
-          <div className="hero-line border-b border-black pb-10">
-            <div className="grid gap-12 xl:grid-cols-[180px_1fr]">
-              <div className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
-                00 / home
-              </div>
-              <div>
-                <p className="reveal-text mb-8 text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
-                  Backend / DevOps Portfolio
-                </p>
-                <div className="reveal-text mb-8 flex flex-wrap gap-2">
-                  {domains.map((domain) => (
-                    <span key={domain} className="border border-black px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]">
-                      {domain}
-                    </span>
-                  ))}
-                </div>
-                <h1 className="reveal-text max-w-6xl text-5xl font-semibold leading-[1.08] tracking-[-0.06em] md:text-8xl">
-                  문제를 고치는 데서 끝내지 않고,
-                  <br />
-                  반복되는 구조를 바꿉니다.
-                </h1>
-                <p className="reveal-text mt-10 max-w-3xl text-lg leading-9 text-neutral-600">
-                  SI 실무에서 마주한 업무 시스템의 문제를 Java/Spring, React, DB, 운영 로그 관점으로 연결해 해결했습니다.
-                  그리고 그 경험을 Spring MSA, Video Streaming, AI 기반 서비스형 사이드 프로젝트로 확장하고 있습니다.
-                </p>
-
-                <div className="reveal-text mt-12 flex flex-wrap gap-3">
-                  <LineButton href="#credentials">View Credentials</LineButton>
-                  <LineButton href="#side-projects">View Side Projects</LineButton>
-                </div>
-              </div>
+        <header className="sticky top-0 z-50 border-b border-black bg-white/90 backdrop-blur lg:hidden">
+          <div className="flex items-center justify-between px-5 py-5">
+            <a href="#credentials" onClick={() => setActive("credentials")} className="text-sm font-bold tracking-[-0.04em]">
+              CHOI.DEV
+            </a>
+            <div className="flex items-center gap-3">
+              <button
+                  type="button"
+                  onClick={handleBackToIntro}
+                  className="border border-black px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em]"
+              >
+                ← Intro
+              </button>
+              <span className="text-xs font-semibold uppercase tracking-[0.22em]">{activeLabel}</span>
             </div>
           </div>
+        </header>
 
-          <div className="grid border-b border-black md:grid-cols-4">
-            {[
-              ["Role", "Backend / DevOps"],
-              ["Domain", "Tax · Law · Video"],
-              ["Track", "MSA · Video Streaming · AI Service"],
-              ["Credential", "CKA · AWS · Linux"],
-            ].map(([k, v], idx) => (
-              <div key={k} className={`py-6 md:px-6 ${idx !== 0 ? "md:border-l md:border-black" : ""}`}>
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">{k}</p>
-                <p className="mt-3 text-lg font-semibold tracking-[-0.04em]">{v}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <div className="mx-auto max-w-7xl px-5 lg:ml-[260px] lg:max-w-none lg:px-12 xl:px-16">
+          <Section
+              id="credentials"
+              index={1}
+              title="Credentials"
+              desc="데이터, 네트워크, 소프트웨어 개발 기본기를 자격증으로 보완했습니다. 실제 자격증 배지 이미지는 발급기관 링크에서 확인하도록 두고, 화면에서는 대중적으로 인식 가능한 대표 기술 마크를 사용했습니다."
+          >
+            <div className="grid border-l border-t border-black md:grid-cols-2 xl:grid-cols-3">
+              {credentials.map((credential) => (
+                  <CredentialCard key={credential.code} credential={credential} />
+              ))}
+            </div>
+          </Section>
 
-        <Section
-          id="credentials"
-          index={1}
-          title="Credentials"
-          desc="클라우드 네이티브, 리눅스, 데이터, 네트워크 기본기를 자격증으로 보완했습니다. 실제 자격증 배지 이미지는 Credly나 발급기관 링크에서 확인하도록 두고, 화면에서는 대중적으로 인식 가능한 대표 기술 마크를 사용했습니다."
-        >
-          <div className="grid border-l border-t border-black md:grid-cols-2 xl:grid-cols-3">
-            {credentials.map((credential) => (
-              <CredentialCard key={credential.code} credential={credential} />
-            ))}
-          </div>
-        </Section>
+          <Section
+              id="skills"
+              index={2}
+              title="Skills"
+              desc="기술 스택은 실제 SVG 로고를 사용하되, 전체 톤은 선과 여백 중심으로 단순하게 유지합니다."
+          >
+            <div className="flex flex-wrap gap-3 border-y border-black py-8">
+              {skills.map((skill) => (
+                  <SkillBadge
+                      key={skill.name}
+                      logo={skill.logo}
+                      fallback={skill.fallback}
+                      name={skill.name}
+                  />
+              ))}
+            </div>
+          </Section>
 
-        <Section
-          id="skills"
-          index={2}
-          title="Skills"
-          desc="기술 스택은 실제 SVG 로고를 사용하되, 전체 톤은 선과 여백 중심으로 단순하게 유지합니다."
-        >
-          <div className="flex flex-wrap gap-3 border-y border-black py-8">
-            {skills.map((skill) => (
-              <SkillBadge
-                key={skill.name}
-                logo={skill.logo}
-                fallback={skill.fallback}
-                name={skill.name}
-              />
-            ))}
-          </div>
-        </Section>
+          <Section
+              id="work"
+              index={3}
+              title="Work"
+              desc="업무 상세를 과하게 드러내기보다, 하나의 실무 프로젝트 안에서 어떤 기술 범위와 문제 해결 경험을 쌓았는지 보여줍니다."
+          >
+            <div className="border-y border-black">
+              {workItems.map((item, idx) => (
+                  <article key={item.title} className={`grid gap-6 py-8 md:grid-cols-[1fr_2fr] ${idx !== 0 ? "border-t border-black" : ""}`}>
+                    <div>
+                      <h3 className="text-2xl font-semibold tracking-[-0.04em]">{item.title}</h3>
+                      <p className="mt-3 text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">{item.role}</p>
+                    </div>
+                    <p className="text-base leading-8 text-neutral-600">{item.desc}</p>
+                  </article>
+              ))}
+            </div>
+          </Section>
 
-        <Section
-          id="work"
-          index={3}
-          title="Work"
-          desc="업무 상세를 과하게 드러내기보다, 하나의 실무 프로젝트 안에서 어떤 기술 범위와 문제 해결 경험을 쌓았는지 보여줍니다."
-        >
-          <div className="border-y border-black">
-            {workItems.map((item, idx) => (
-              <article key={item.title} className={`grid gap-6 py-8 md:grid-cols-[1fr_2fr] ${idx !== 0 ? "border-t border-black" : ""}`}>
+          <Section
+              id="approach"
+              index={4}
+              title="Approach"
+              desc="경력기술서의 핵심 내용을 업무명 중심이 아니라 개발 방식 중심으로 압축합니다. 검증, 연계, 데이터 흐름, 운영 분석, AI 활용 경험을 통해 어떤 방식으로 문제를 다루는지 보여줍니다."
+          >
+            <div className="border-y border-black">
+              {approaches.map(([no, title, desc]) => (
+                  <article key={title} className="grid gap-5 border-b border-black py-7 last:border-b-0 md:grid-cols-[120px_260px_1fr]">
+                    <div className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">{no}</div>
+                    <h3 className="text-xl font-semibold tracking-[-0.05em]">{title}</h3>
+                    <p className="text-sm leading-7 text-neutral-600">{desc}</p>
+                  </article>
+              ))}
+            </div>
+          </Section>
+
+          <Section
+              id="side-projects"
+              index={5}
+              title="Side Projects"
+              desc="실무에서 느낀 구조적 한계를 MSA 서비스와 Video Streaming 서비스 안에서 다시 설계하고 구현합니다."
+          >
+            <div className="grid border-y border-black lg:grid-cols-2">
+              {sideProjects.map((project, idx) => {
+                const selected = selectedProjectId === project.id;
+                return (
+                    <article key={project.id} className={`p-6 ${idx !== 0 ? "border-t border-black lg:border-l lg:border-t-0" : ""}`}>
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
+                        Side Project {String(idx + 1).padStart(2, "0")}
+                      </p>
+                      <h3 className="mt-5 text-3xl font-semibold leading-tight tracking-[-0.04em]">{project.title}</h3>
+                      <p className="mt-5 text-sm font-semibold leading-7">{project.oneLine}</p>
+                      <p className="mt-4 text-sm leading-7 text-neutral-600">{project.desc}</p>
+                      <button
+                          type="button"
+                          onClick={() => setSelectedProjectId(project.id)}
+                          className={`mt-7 border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition hover:-translate-y-0.5 ${
+                              selected ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"
+                          }`}
+                      >
+                        {selected ? "Selected" : "Detail →"}
+                      </button>
+                    </article>
+                );
+              })}
+            </div>
+
+            <div key={selectedProject.id} className="reveal-text mt-10 border-y border-black py-10">
+              <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
                 <div>
-                  <h3 className="text-2xl font-semibold tracking-[-0.04em]">{item.title}</h3>
-                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">{item.role}</p>
-                </div>
-                <p className="text-base leading-8 text-neutral-600">{item.desc}</p>
-              </article>
-            ))}
-          </div>
-        </Section>
-
-        <Section
-          id="approach"
-          index={4}
-          title="Approach"
-          desc="경력기술서의 핵심 내용을 업무명 중심이 아니라 개발 방식 중심으로 압축합니다. 검증, 연계, 데이터 흐름, 운영 분석 경험을 통해 어떤 방식으로 문제를 다루는지 보여줍니다."
-        >
-          <div className="border-y border-black">
-            {approaches.map(([no, title, desc]) => (
-              <article key={title} className="grid gap-5 border-b border-black py-7 last:border-b-0 md:grid-cols-[120px_260px_1fr]">
-                <div className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">{no}</div>
-                <h3 className="text-xl font-semibold tracking-[-0.05em]">{title}</h3>
-                <p className="text-sm leading-7 text-neutral-600">{desc}</p>
-              </article>
-            ))}
-          </div>
-        </Section>
-
-        <Section
-          id="side-projects"
-          index={5}
-          title="Side Projects"
-          desc="실무에서 느낀 구조적 한계를 MSA 서비스, Video Streaming 서비스, AI 기반 실제 서비스 프로젝트 안에서 다시 설계하고 구현합니다."
-        >
-          <div className="grid border-y border-black lg:grid-cols-3">
-            {sideProjects.map((project, idx) => {
-              const selected = selectedProjectId === project.id;
-              return (
-                <article key={project.id} className={`p-6 ${idx !== 0 ? "border-t border-black lg:border-l lg:border-t-0" : ""}`}>
-                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
-                    Side Project {String(idx + 1).padStart(2, "0")}
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">Project Detail</p>
+                  <h3 className="mt-5 text-4xl font-semibold leading-tight tracking-[-0.05em]">{selectedProject.title}</h3>
+                  <p className="mt-5 inline-flex border border-black px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]">
+                    {selectedProject.status}
                   </p>
-                  <h3 className="mt-5 text-3xl font-semibold leading-tight tracking-[-0.04em]">{project.title}</h3>
-                  <p className="mt-5 text-sm font-semibold leading-7">{project.oneLine}</p>
-                  <p className="mt-4 text-sm leading-7 text-neutral-600">{project.desc}</p>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedProjectId(project.id)}
-                    className={`mt-7 border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition hover:-translate-y-0.5 ${
-                      selected ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"
-                    }`}
-                  >
-                    {selected ? "Selected" : "Detail →"}
-                  </button>
-                </article>
-              );
-            })}
-          </div>
-
-          <div key={selectedProject.id} className="reveal-text mt-10 border-y border-black py-10">
-            <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">Project Detail</p>
-                <h3 className="mt-5 text-4xl font-semibold leading-tight tracking-[-0.05em]">{selectedProject.title}</h3>
-                <p className="mt-5 inline-flex border border-black px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]">
-                  {selectedProject.status}
-                </p>
-                <div className="mt-6 border-t border-black pt-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">Stack</p>
-                  <p className="mt-3 text-sm leading-7 text-neutral-700">{selectedProject.stack}</p>
+                  <div className="mt-6 border-t border-black pt-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">Stack</p>
+                    <p className="mt-3 text-sm leading-7 text-neutral-700">{selectedProject.stack}</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="grid gap-8">
-                <DetailBlock title="Architecture" items={selectedProject.architecture} />
-                <DetailBlock title="Implemented" items={selectedProject.implemented} />
-                <DetailBlock title="Tests / Evidence" items={selectedProject.tests} />
-                <div className="border-t border-black pt-5">
-                  <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500">Links</p>
-                  <div className="flex flex-wrap gap-3">
-                    {selectedProject.evidence.map((item) => (
-                      <a key={item} href="#" className="border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white">
-                        {item}
-                      </a>
-                    ))}
+                <div className="grid gap-8">
+                  <DetailBlock title="Architecture" items={selectedProject.architecture} />
+                  <DetailBlock title="Implemented" items={selectedProject.implemented} />
+                  <DetailBlock title="Tests / Evidence" items={selectedProject.tests} />
+                  <div className="border-t border-black pt-5">
+                    <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500">Links</p>
+                    <div className="flex flex-wrap gap-3">
+                      {selectedProject.evidence.map((item) => (
+                          <a key={item} href="#" className="border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white">
+                            {item}
+                          </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Section>
+          </Section>
 
-        <Section
-          id="archive"
-          index={6}
-          title="Archive"
-          desc="블로그는 기술 사용 목록이 아니라, 문제 해결 과정과 의사결정 기록으로 보여줍니다."
-        >
-          <div className="grid border-y border-black md:grid-cols-2">
-            {archives.map((item, idx) => (
-              <a
-                key={item}
-                href="#"
-                className={`group flex items-center justify-between gap-6 py-5 text-sm font-medium transition-all hover:bg-black hover:px-4 hover:text-white ${idx >= 2 ? "border-t border-black" : ""} ${idx % 2 === 1 ? "md:border-l md:border-black" : ""}`}
-              >
-                <span>{item}</span>
-                <span className="transition group-hover:translate-x-1">→</span>
-              </a>
-            ))}
-          </div>
-        </Section>
+          <Section
+              id="archive"
+              index={6}
+              title="Archive"
+              desc="블로그는 기술 사용 목록이 아니라, 문제 해결 과정과 의사결정 기록으로 보여줍니다."
+          >
+            <div className="grid border-y border-black md:grid-cols-2">
+              {archives.map((item, idx) => (
+                  <a
+                      key={item}
+                      href="#"
+                      className={`group flex items-center justify-between gap-6 py-5 text-sm font-medium transition-all hover:bg-black hover:px-4 hover:text-white ${idx >= 2 ? "border-t border-black" : ""} ${idx % 2 === 1 ? "md:border-l md:border-black" : ""}`}
+                  >
+                    <span>{item}</span>
+                    <span className="transition group-hover:translate-x-1">→</span>
+                  </a>
+              ))}
+            </div>
+          </Section>
 
-        <Section
-          id="contact"
-          index={7}
-          title="Contact"
-          desc="마지막은 불필요한 설명 없이 링크만 배치합니다."
-        >
-          <div className="flex flex-wrap gap-4 border-y border-black py-8">
-            {["Email", "GitHub", "Resume PDF", "Blog"].map((item) => (
-              <a key={item} href="#" className="border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white">
-                {item}
-              </a>
-            ))}
-          </div>
-        </Section>
-      </div>
-    </main>
+          <Section
+              id="contact"
+              index={7}
+              title="Contact"
+              desc="마지막은 불필요한 설명 없이 링크만 배치합니다."
+          >
+            <div className="flex flex-wrap gap-4 border-y border-black py-8">
+              {["Email", "GitHub", "Resume PDF", "Blog"].map((item) => (
+                  <a key={item} href="#" className="border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white">
+                    {item}
+                  </a>
+              ))}
+            </div>
+          </Section>
+        </div>
+      </main>
   );
 }
