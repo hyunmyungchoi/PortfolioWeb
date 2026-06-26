@@ -140,10 +140,10 @@ const sideProjects = [
   {
     id: "spring-msa",
     title: "Spring MSA Platform",
-    oneLine: "실무에서 경험한 구조적 문제를 Spring 기반 MSA 서비스 구조로 재설계한 프로젝트",
-    desc: "프론트엔드 독립 빌드, 세션 관리, 권한 분리, 외부 인터페이스 테스트, 대시보드 집계, Redis 활용 문제를 Gateway, BFF, Authorization Server, Redis Session, 도메인 서비스 분리 기반의 MSA 서비스 구조로 다시 설계했습니다.",
-    stack: "Spring Boot · Spring Security · Authorization Server · Gateway · BFF · Redis · PostgreSQL · React · Kubernetes",
-    status: "Completed MVP / Deployed Demo",
+    oneLine: "실무에서 경험한 구조적 문제를 Spring 기반 서비스 분리 구조로 다시 정리한 프로젝트",
+    desc: "프론트엔드 독립 빌드, 세션 관리, 권한 분리, 외부 인터페이스 테스트, 대시보드 집계 문제를 Gateway, BFF, Authorization Server, Redis Session, 도메인 서비스 분리 관점으로 다시 설계했습니다. Docker 기반 로컬 실행 환경을 먼저 구성하고, 이후 컨테이너 운영 구조로 확장할 수 있도록 학습하며 적용 방향을 잡고 있습니다.",
+    stack: "Spring Boot · Spring Security · Authorization Server · Gateway · BFF · Redis · PostgreSQL · React · Docker",
+    status: "MVP / Docker-based Lab",
     architecture: [
       "Public Gateway / Admin Gateway로 사용자 채널과 관리자 채널 분리",
       "Business BFF / Admin BFF에서 브라우저 토큰 저장 없이 Redis Session 기반 인증 상태 관리",
@@ -155,23 +155,23 @@ const sideProjects = [
       "Gateway → BFF → Authorization Server → Resource Server 인증 흐름 구현",
       "Redis Session Store, Refresh Token/ID Token 서버 측 저장 구조 적용",
       "Business/Admin 채널 분리와 ROLE_USER / ROLE_ADMIN 접근 경계 구성",
-      "Docker Compose와 Kubernetes manifest 기반 실행 환경 구성",
-      "GitHub Actions 기반 build/test workflow와 README 실행 가이드 작성",
+      "Docker Compose 기반 로컬 실행 환경 구성",
+      "API 문서와 실행 가이드 정리",
     ],
     tests: [
       "Auth Flow 통합 테스트",
       "BFF Session / Redis Session 테스트",
       "Resource Server JWT 검증 테스트",
       "Gateway Routing 테스트",
-      "API 문서와 Postman Collection 정리",
+      "Postman Collection 기반 API 흐름 확인",
     ],
-    evidence: ["GitHub", "README", "Demo", "Architecture", "Test Report"],
+    evidence: profileLinks,
   },
   {
     id: "video-streaming",
     title: "Video Streaming Platform",
     oneLine: "방송형 서비스와 회의형 서비스를 함께 고려한 Video Streaming 메인 도메인 프로젝트",
-    desc: "OBS 기반 RTMP 송출, FFmpeg 기반 HLS/DASH 변환, Shaka Player 브라우저 재생, WebRTC 기반 저지연 통신을 목표로 설계했습니다. Spring Boot는 서비스 도메인을, Go는 WebRTC SFU와 미디어 세션 처리를 담당하도록 분리했습니다.",
+    desc: "OBS 기반 RTMP 송출, FFmpeg 기반 HLS/DASH 변환, Shaka Player 브라우저 재생, WebRTC 기반 저지연 통신을 목표로 설계했습니다. Spring Boot는 서비스 도메인을 담당하고, Go는 WebRTC SFU와 미디어 세션 처리 영역으로 분리하는 방향으로 학습하며 구현하고 있습니다.",
     stack: "React · Spring Boot · Go SFU · WebRTC · RTMP · FFmpeg · HLS/DASH · Kafka · Redis · Docker",
     status: "Streaming MVP / Realtime Track",
     architecture: [
@@ -195,7 +195,7 @@ const sideProjects = [
       "WebSocket 연결/해제 테스트",
       "스트리밍 아키텍처 README와 실행 GIF 정리",
     ],
-    evidence: ["GitHub", "README", "Demo Video", "Architecture", "Troubleshooting"],
+    evidence: profileLinks,
   },
 ];
 
@@ -206,6 +206,43 @@ const archives = [
   "Kafka 이벤트 처리와 재처리 구조",
   "RTMP, HLS/DASH, WebRTC 역할 구분하기",
   "Kibana Trace ID 기반 운영 로그 분석 패턴",
+];
+
+
+const profileLinks = [
+  {
+    label: "GitHub",
+    href: "https://github.com/hyunmyungchoi",
+    logo: "https://cdn.simpleicons.org/github/000000",
+    fallback: "GH",
+  },
+  {
+    label: "Velog",
+    href: "https://velog.io/@hyunmyungchoi/posts",
+    logo: "https://cdn.simpleicons.org/velog/20C997",
+    fallback: "VE",
+  },
+];
+
+const contactLinks = [
+  {
+    label: "GitHub",
+    href: "https://github.com/hyunmyungchoi",
+    logo: "https://cdn.simpleicons.org/github/000000",
+    fallback: "GH",
+  },
+  {
+    label: "Velog",
+    href: "https://velog.io/@hyunmyungchoi/posts",
+    logo: "https://cdn.simpleicons.org/velog/20C997",
+    fallback: "VE",
+  },
+  {
+    label: "Resume PDF",
+    href: "#",
+    logo: "https://cdn.simpleicons.org/readthedocs/000000",
+    fallback: "PDF",
+  },
 ];
 
 function Section({ id, index, title, desc, children }) {
@@ -589,7 +626,7 @@ export default function CleanLinePortfolio() {
             CHOI.DEV
           </a>
           <p className="mt-4 max-w-[190px] text-xs leading-6 text-neutral-500">
-            Backend developer who turns repeated problems into maintainable structures.
+            업무 흐름을 코드와 데이터 구조로 연결하고, 반복되는 문제를 유지보수 가능한 형태로 정리하려는 개발자입니다.
           </p>
 
           <button
@@ -767,8 +804,22 @@ export default function CleanLinePortfolio() {
                     <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500">Links</p>
                     <div className="flex flex-wrap gap-3">
                       {selectedProject.evidence.map((item) => (
-                          <a key={item} href="#" className="border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white">
-                            {item}
+                          <a
+                              key={item.label}
+                              href={item.href}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="group inline-flex items-center gap-3 border border-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
+                          >
+                            <span className="grid h-5 w-5 place-items-center">
+                              <img
+                                  src={item.logo}
+                                  alt={`${item.label} logo`}
+                                  className="h-4 w-4 object-contain transition group-hover:invert"
+                                  loading="lazy"
+                              />
+                            </span>
+                            {item.label}
                           </a>
                       ))}
                     </div>
@@ -802,12 +853,26 @@ export default function CleanLinePortfolio() {
               id="contact"
               index={7}
               title="Contact"
-              desc="마지막은 불필요한 설명 없이 링크만 배치합니다."
+              desc="깃허브, 기술 기록, 이력서 링크만 간단히 정리했습니다."
           >
             <div className="flex flex-wrap gap-4 border-y border-black py-8">
-              {["Email", "GitHub", "Resume PDF", "Blog"].map((item) => (
-                  <a key={item} href="#" className="border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white">
-                    {item}
+              {contactLinks.map((item) => (
+                  <a
+                      key={item.label}
+                      href={item.href}
+                      target={item.href === "#" ? undefined : "_blank"}
+                      rel={item.href === "#" ? undefined : "noreferrer"}
+                      className="group inline-flex items-center gap-3 border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
+                  >
+        <span className="grid h-6 w-6 place-items-center border border-black bg-white transition group-hover:border-white">
+          <img
+              src={item.logo}
+              alt={`${item.label} logo`}
+              className="h-4 w-4 object-contain transition group-hover:scale-110"
+              loading="lazy"
+          />
+        </span>
+                    {item.label}
                   </a>
               ))}
             </div>
