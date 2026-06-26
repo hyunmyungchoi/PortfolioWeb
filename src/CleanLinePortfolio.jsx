@@ -185,7 +185,9 @@ const sideProjects = [
     id: "spring-msa",
     title: "Spring MSA Platform",
     oneLine: "실무에서 경험한 구조적 문제를 Spring 기반 서비스 분리 구조로 다시 정리한 프로젝트",
-    desc: "프론트엔드 독립 빌드, 세션 관리, 권한 분리, 외부 인터페이스 테스트, 대시보드 집계 문제를 Gateway, BFF, Authorization Server, Redis Session, 도메인 서비스 분리 관점으로 다시 설계했습니다. Docker Compose 기반 로컬 실행 환경을 구성했고, 이후 GitHub Actions, Kubernetes, Argo CD, AWS 배포 구조로 확장할 계획입니다.",    status: "MSA / Docker-based Lab / DevOps Track",
+    desc: "프론트엔드 독립 빌드, 세션 관리, 권한 분리, 외부 인터페이스 테스트, 대시보드 집계 문제를 Gateway, BFF, Authorization Server, Redis Session, 도메인 서비스 분리 관점으로 다시 설계했습니다. Docker Compose 기반 로컬 실행 환경을 구성했고, 이후 GitHub Actions, Kubernetes, Argo CD, AWS 배포 구조로 확장할 계획입니다.",
+    stack: "Spring Boot · Spring Security · Authorization Server · Gateway · BFF · Redis · PostgreSQL · React · Docker",
+    status: "MSA / Docker-based Lab / DevOps Track",
     architecture: [
       "Public Gateway / Admin Gateway로 사용자 채널과 관리자 채널 분리",
       "Business BFF / Admin BFF에서 브라우저 토큰 저장 없이 Redis Session 기반 인증 상태 관리",
@@ -812,8 +814,7 @@ export default function CleanLinePortfolio() {
               id="approach"
               index={4}
               title="Approach"
-              desc="업무를 단순 기능 단위로 보지 않고 상태 흐름, 조건 분기, 데이터 반영, 운영 로그까지 이어서 확인하는 방식을 정리했습니다. 문제를 빠르게 고치기보다 왜 발생했는지와 다시 깨지지 않게 하려면 어디를 잡아야 하는지를 먼저 봅니다."
-          >
+              desc="위 실무 경험을 수행하면서 형성된 문제 해결 방식입니다. 기능을 빠르게 만드는 것보다 업무 상태, 예외 조건, 데이터 반영, 운영 로그까지 이어서 확인하는 방식을 기준으로 일합니다."          >
             <div className="border-y border-black">
               {approaches.map(([no, title, desc]) => (
                   <article
@@ -838,8 +839,7 @@ export default function CleanLinePortfolio() {
               id="side-projects"
               index={5}
               title="Side Projects"
-              desc="실무에서 경험한 구조적 문제를 Spring MSA와 Video Streaming 프로젝트로 재설계하고, Docker, CI/CD, Kubernetes, AWS 배포 구조까지 확장해 애플리케이션이 운영되는 흐름을 함께 검증합니다."
-          >
+              desc="실무에서 경험한 구조적 문제를 Spring MSA와 Video Streaming 프로젝트로 재설계하고, Docker 기반 로컬 실행 환경에서 시작해 CI/CD, Kubernetes, AWS 배포 구조로 확장하는 과정을 검증합니다."          >
             <div className="grid border-y border-black lg:grid-cols-2">
               {sideProjects.map((project, idx) => {
                 const selected = selectedProjectId === project.id;
