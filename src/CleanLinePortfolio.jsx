@@ -121,34 +121,34 @@ const skills = [
 
 const workItems = [
   {
-    title: "Requirement to Implementation",
-    role: "업무 요구사항 분석 · 화면/API/DB 연결",
-    desc: "SI 프로젝트에서 고객 요구사항을 화면 흐름, 백엔드 API, DB 데이터 구조로 나누어 해석하고 구현했습니다. 단순히 화면을 만드는 것보다 업무 상태와 데이터 흐름이 맞게 이어지는지를 기준으로 개발했습니다.",
+    title: "Backend Workflow Implementation",
+    role: "Java · Spring · 업무 상태 처리",
+    desc: "OBA 업무의 신청, 검토, 승인, 반려, 완료 흐름에 맞춰 백엔드 API와 상태 처리 로직을 구현했습니다. 단순 데이터 저장보다 업무 단계별 상태값과 후속 처리 흐름이 맞게 이어지는지를 기준으로 개발했습니다.",
   },
   {
-    title: "Validation & Common Logic",
-    role: "Spring Validation · 공통 검증 구조",
-    desc: "요청값 검증, 업무 조건 확인, 상태 판단처럼 반복되는 로직은 서비스 코드 안에 흩어지지 않도록 공통화했습니다. Spring Validation과 커스텀 Validator를 활용해 검증 기준을 일관되게 관리하는 방향으로 개선했습니다.",
+    title: "Validation & Notification Module",
+    role: "Spring Validation · Mail · SMS · Portal Message",
+    desc: "Spring Validation과 커스텀 ConstraintValidator를 활용해 업무 규칙 기반 요청값 검증을 구현하고, 신청 상태 변경·담당자 배정·승인·반려·처리 완료 시점에 맞춰 Mail, SMS, Portal Message 알림 기능을 연계했습니다.",
   },
   {
-    title: "Notification & Workflow Handling",
-    role: "Mail · SMS · Portal Message · 업무 상태 처리",
-    desc: "신청, 배정, 승인, 반려, 처리 완료 등 업무 흐름별 알림 로직을 구현했습니다. 사용자 ID, 메시지 코드, 파라미터, 수신 가능 여부를 기준으로 반복되는 알림 처리를 공통 호출 구조로 정리했습니다.",
+    title: "Internal API & Batch Processing",
+    role: "Feign Client · Spring Batch · 자동 처리",
+    desc: "Feign Client 기반 내부 API 연계 구조를 구현하고, Spring Batch를 활용해 정기적으로 수행되는 업무 상태 전환과 후속 처리 자동화 로직을 개발했습니다. 처리 결과와 DB 상태를 함께 확인하며 배치 수행 흐름을 검증했습니다.",
   },
   {
-    title: "Frontend Maintainability",
+    title: "Frontend Component Refactoring",
     role: "React · TypeScript · Component · Custom Hook",
-    desc: "검색 영역, 상세 영역, 공통 정보 영역을 컴포넌트 단위로 분리하고 반복 조회 로직과 이벤트 처리는 Custom Hook으로 정리했습니다. 화면이 커질수록 상태 흐름을 추적하기 쉽도록 구조를 나누는 데 집중했습니다.",
+    desc: "검색 영역, 상세 영역, 공통 정보 영역을 컴포넌트 단위로 분리하고, 반복되는 조회·이벤트·상태 관리 로직을 Custom Hook으로 분리했습니다. 대형 화면 컴포넌트의 책임을 줄이고 재사용성과 유지보수성을 높이는 데 집중했습니다.",
   },
   {
-    title: "Operation Issue Tracking",
-    role: "Kibana · Trace ID · DB 상태 확인",
-    desc: "Staging과 Production 환경에서 Kibana 로그, API 경로, 사용자 ID, 오류 코드, Trace ID를 기준으로 이슈를 분석했습니다. 로그와 DB 상태를 함께 확인하며 외부 연계 실패나 데이터 처리 예외의 원인을 좁혀갔습니다.",
+    title: "Operation Log Analysis",
+    role: "Kibana · Trace ID · API Path · DB 상태 확인",
+    desc: "Staging과 Production 환경에서 Kibana 로그, API 경로, 사용자 ID, 오류 코드, Trace ID를 기준으로 운영 이슈를 분석했습니다. 외부 연계 실패, API 응답 오류, 데이터 처리 예외 발생 시 로그와 DB 상태를 함께 확인하며 원인을 좁혔습니다.",
   },
   {
-    title: "Change-safe Implementation",
-    role: "영향 범위 확인 · 조건 분기 정리 · 수정 근거 기록",
-    desc: "기존 업무 로직을 수정할 때는 화면 증상만 보고 바로 고치기보다, 관련 조건 분기와 DB 상태, 배치 영향, 알림 흐름까지 함께 확인했습니다. 수정 후에는 왜 바꿨는지와 어떤 케이스를 막기 위한 변경인지 남겨 재수정 가능성을 줄이는 방향으로 작업했습니다.",
+    title: "Documentation & Communication",
+    role: "API Guide · Issue Report · Test Request",
+    desc: "고객 요구사항과 회의 내용을 개발 가능한 기능 단위로 정리하고, API 연계 규격, 상태 흐름, 오류 케이스, 테스트 요청 내용을 문서화했습니다. 운영 이슈 발생 시 원인과 조치 내용을 정리해 고객 및 유관 팀과 공유했습니다.",
   },
 ];
 
@@ -246,12 +246,62 @@ const sideProjects = [
 ];
 
 const archives = [
-  "Spring Validation으로 검증 책임 분리하기",
-  "BFF Pattern으로 브라우저 토큰 저장 피하기",
-  "Redis를 세션, OTP, 캐시로 나눠 사용하는 기준",
-  "Kafka 이벤트 처리와 재처리 구조",
-  "RTMP, HLS/DASH, WebRTC 역할 구분하기",
-  "Kibana Trace ID 기반 운영 로그 분석 패턴",
+  {
+    category: "Operations",
+    title: "Kibana로 운영 로그 추적하기",
+    desc: "API Path, 사용자 ID, Trace ID, 오류 코드 기준으로 OBA 로그를 필터링하고 DB 상태와 함께 원인을 좁힌 경험을 정리합니다.",
+    href: "#",
+    status: "Writing",
+  },
+  {
+    category: "Operations",
+    title: "실무 알림 기능 구현 기록",
+    desc: "Mail, SMS, Portal Message를 업무 상태 흐름에 맞게 연계하고, 테스트 환경에서 실제 발송을 제어하는 기준을 정리합니다.",
+    href: "#",
+    status: "Writing",
+  },
+  {
+    category: "Backend",
+    title: "Spring Validation 공통 검증 구조",
+    desc: "업무 규칙 검증, 커스텀 ConstraintValidator, 사내 프레임워크 기준 JSON 오류 응답 처리 구조를 정리합니다.",
+    href: "#",
+    status: "Writing",
+  },
+  {
+    category: "Frontend",
+    title: "React Custom Hook 리팩터링 기록",
+    desc: "대형 상세 화면에서 반복 조회, 이벤트 처리, 상태 관리 로직을 Custom Hook으로 분리한 이유와 기준을 정리합니다.",
+    href: "#",
+    status: "Writing",
+  },
+  {
+    category: "Cloud / DevOps",
+    title: "AWS S3와 CloudFront로 포트폴리오 배포하기",
+    desc: "Vite 빌드 산출물을 S3에 배포하고 CloudFront를 통해 공개 접근 가능한 정적 웹 서비스로 운영하는 과정을 정리합니다.",
+    href: "#",
+    status: "Planned",
+  },
+  {
+    category: "Cloud / DevOps",
+    title: "GitHub Actions 기반 배포 자동화",
+    desc: "main 브랜치 push 이후 build, S3 sync, CloudFront invalidation으로 이어지는 프론트엔드 배포 흐름을 정리합니다.",
+    href: "#",
+    status: "Planned",
+  },
+  {
+    category: "Cloud / DevOps",
+    title: "Spring MSA Docker Compose 실행 구조",
+    desc: "Gateway, BFF, Authorization Server, Resource Server, Redis, PostgreSQL을 로컬에서 함께 실행하는 구조를 정리합니다.",
+    href: "#",
+    status: "Planned",
+  },
+  {
+    category: "Cloud / DevOps",
+    title: "Kubernetes와 Argo CD 배포 흐름 실험",
+    desc: "Kubernetes Manifest, ConfigMap, Secret, Ingress, Argo CD Sync/OutOfSync 흐름을 실험하고 정리합니다.",
+    href: "#",
+    status: "Planned",
+  },
 ];
 
 
@@ -748,8 +798,7 @@ export default function CleanLinePortfolio() {
               id="work"
               index={3}
               title="Work"
-              desc="업무 상세를 과하게 드러내기보다, 하나의 실무 프로젝트 안에서 어떤 기술 범위와 문제 해결 경험을 쌓았는지 보여줍니다."
-          >
+              desc="SI 실무 프로젝트에서 담당한 백엔드 API, 검증·알림 모듈, 내부 연계, 배치 자동화, 프론트엔드 구조 개선, 운영 로그 분석 경험을 역할 단위로 정리했습니다.">
             <div className="border-y border-black">
               {workItems.map((item, idx) => (
                   <article key={item.title} className={`grid gap-6 py-8 md:grid-cols-[1fr_2fr] ${idx !== 0 ? "border-t border-black" : ""}`}>
@@ -911,19 +960,54 @@ export default function CleanLinePortfolio() {
               id="archive"
               index={7}
               title="Archive"
-              desc="블로그는 기술 사용 목록이 아니라, 문제 해결 과정과 의사결정 기록으로 보여줍니다."
+              desc="실무에서 마주친 운영 이슈, 백엔드 구조화, 프론트엔드 리팩터링 경험과 함께 Docker, CI/CD, Kubernetes, AWS로 확장하는 과정을 기술 기록으로 정리합니다."
           >
             <div className="grid border-y border-black md:grid-cols-2">
-              {archives.map((item, idx) => (
-                  <a
-                      key={item}
-                      href="#"
-                      className={`group flex items-center justify-between gap-6 px-4 py-5 text-sm font-medium transition-all hover:bg-black hover:text-white ${idx >= 2 ? "border-t border-black" : ""} ${idx % 2 === 1 ? "md:border-l md:border-black" : ""}`}
+              {archives.map((item, idx) => {
+                const isReady = item.href && item.href !== "#";
+
+                return (
+                  <article
+                    key={item.title}
+                    className={`group p-6 transition hover:bg-black hover:text-white ${
+                      idx >= 2 ? "border-t border-black" : ""
+                    } ${idx % 2 === 1 ? "md:border-l md:border-black" : ""}`}
                   >
-                    <span>{item}</span>
-                    <span className="transition group-hover:translate-x-1">→</span>
-                  </a>
-              ))}
+                    <div className="flex items-center justify-between gap-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500 transition group-hover:text-white/60">
+                        {item.category}
+                      </p>
+                      <span className="border border-current px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">
+                        {item.status}
+                      </span>
+                    </div>
+
+                    <h3 className="mt-5 text-xl font-semibold leading-7 tracking-[-0.04em] break-keep">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-4 text-sm leading-7 text-neutral-600 transition group-hover:text-white/70 break-keep">
+                      {item.desc}
+                    </p>
+
+                    {isReady ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]"
+                      >
+                        Read note
+                        <span className="transition group-hover:translate-x-1">→</span>
+                      </a>
+                    ) : (
+                      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-400">
+                        Preparing
+                      </p>
+                    )}
+                  </article>
+                );
+              })}
             </div>
           </Section>
 
