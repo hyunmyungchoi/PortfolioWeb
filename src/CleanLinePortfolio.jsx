@@ -18,8 +18,8 @@ const credentials = [
     title: "SQL Developer",
     issuer: "KData",
     desc: "관계형 데이터베이스, SQL, 모델링 기본 이해",
-    focus: "RDB / SQL Modeling",
-    logo: "/kdata.png",
+    focus: "RDB / SQL",
+    logo: "https://cdn.simpleicons.org/postgresql/000000",
     fallback: "SQL",
     weight: "normal",
   },
@@ -28,8 +28,8 @@ const credentials = [
     title: "데이터분석 준전문가",
     issuer: "KData",
     desc: "데이터 분석 프로세스, 통계, 분석 기획 기본 이해",
-    focus: "Data / Analytics",
-    logo: "/kdata.png",
+    focus: "Data Analysis",
+    logo: "https://cdn.simpleicons.org/googleanalytics/000000",
     fallback: "DATA",
     weight: "normal",
   },
@@ -38,8 +38,8 @@ const credentials = [
     title: "네트워크관리사 2급",
     issuer: "한국정보통신협회",
     desc: "TCP/IP, 네트워크 구성, 인프라 기본 개념",
-    focus: "TCP/IP / Network",
-    logo: "/icqa.png",
+    focus: "Network",
+    logo: "https://cdn.simpleicons.org/cisco/000000",
     fallback: "NET",
     weight: "normal",
   },
@@ -47,9 +47,9 @@ const credentials = [
     code: "정보처리",
     title: "정보처리기능사",
     issuer: "한국산업인력공단",
-    desc: "소프트웨어 개발, 데이터베이스, 업무 시스템 구현에 필요한 기본기를 보완",
-    focus: "Software / CS Foundation",
-    logo: "/hrdkorea.png",
+    desc: "소프트웨어 개발, 데이터베이스, 업무 시스템 구현에 필요한 기본기",
+    focus: "Software",
+    logo: "https://cdn.simpleicons.org/codecademy/000000",
     fallback: "IT",
     weight: "normal",
   },
@@ -77,42 +77,62 @@ const skills = [
 
 const workItems = [
   {
-    title: "Tanzania IDRAS / OBA Project",
-    role: "Java / Spring · React · Oracle · Kibana",
-    desc: "공공 세무 업무 시스템에서 요구사항을 업무 흐름으로 해석하고, 백엔드 API, 화면 구조, 데이터 처리, 운영 로그 분석까지 연결해 기능을 구현하고 개선했습니다.",
+    title: "Requirement to Implementation",
+    role: "업무 요구사항 분석 · 화면/API/DB 연결",
+    desc: "SI 프로젝트에서 고객 요구사항을 화면 흐름, 백엔드 API, DB 데이터 구조로 나누어 해석하고 구현했습니다. 단순히 화면을 만드는 것보다 업무 상태와 데이터 흐름이 맞게 이어지는지를 기준으로 개발했습니다.",
   },
   {
-    title: "MSA-oriented Business System Experience",
-    role: "Backend · Frontend · Operation",
-    desc: "서비스 분리를 지향하는 구조 안에서 권한 검증, 요청값 검증, 내부 API 연계, 상태 처리, 운영 이슈 분석 경험을 쌓았습니다.",
+    title: "Validation & Common Logic",
+    role: "Spring Validation · 공통 검증 구조",
+    desc: "요청값 검증, 업무 조건 확인, 상태 판단처럼 반복되는 로직은 서비스 코드 안에 흩어지지 않도록 공통화했습니다. Spring Validation과 커스텀 Validator를 활용해 검증 기준을 일관되게 관리하는 방향으로 개선했습니다.",
+  },
+  {
+    title: "Notification & Workflow Handling",
+    role: "Mail · SMS · Portal Message · 업무 상태 처리",
+    desc: "신청, 배정, 승인, 반려, 처리 완료 등 업무 흐름별 알림 로직을 구현했습니다. 사용자 ID, 메시지 코드, 파라미터, 수신 가능 여부를 기준으로 반복되는 알림 처리를 공통 호출 구조로 정리했습니다.",
+  },
+  {
+    title: "Frontend Maintainability",
+    role: "React · TypeScript · Component · Custom Hook",
+    desc: "검색 영역, 상세 영역, 공통 정보 영역을 컴포넌트 단위로 분리하고 반복 조회 로직과 이벤트 처리는 Custom Hook으로 정리했습니다. 화면이 커질수록 상태 흐름을 추적하기 쉽도록 구조를 나누는 데 집중했습니다.",
+  },
+  {
+    title: "Operation Issue Tracking",
+    role: "Kibana · Trace ID · DB 상태 확인",
+    desc: "Staging과 Production 환경에서 Kibana 로그, API 경로, 사용자 ID, 오류 코드, Trace ID를 기준으로 이슈를 분석했습니다. 로그와 DB 상태를 함께 확인하며 외부 연계 실패나 데이터 처리 예외의 원인을 좁혀갔습니다.",
+  },
+  {
+    title: "AI-assisted Development",
+    role: "Codex · GPT · Gemini · 개발 속도 개선",
+    desc: "Codex, GPT, Gemini를 활용해 코드 초안 작성, 리팩터링 방향 검토, 오류 원인 정리, 문서화를 빠르게 보조했습니다. 특히 이벤트 처리와 주요 함수에는 의도 주석을 남겨 AI Agent가 수정 범위를 이해하기 쉽게 관리했습니다.",
   },
 ];
 
 const approaches = [
   [
     "01",
-    "Validation & Security",
-    "서비스 로직에 흩어지는 검증과 권한 체크를 Spring Validation, ConstraintValidator, Spring Security 기반 구조로 분리합니다.",
+    "업무 흐름 먼저 이해",
+    "화면 단위로만 보지 않고 신청, 검토, 승인, 반려, 완료처럼 업무 상태가 어떻게 이어지는지 먼저 정리합니다.",
   ],
   [
     "02",
-    "Service Integration",
-    "모듈 간 데이터 의존을 줄이기 위해 직접 쿼리 공유보다 Feign Client 기반 내부 API 연계 구조를 우선합니다.",
+    "반복 로직 공통화",
+    "검증, 알림, 상태 판단, 데이터 매핑처럼 여러 화면과 서비스에서 반복되는 로직은 공통 구조로 분리하려고 합니다.",
   ],
   [
     "03",
-    "Data & State Flow",
-    "화면 기준보다 업무 상태, 데이터 흐름, VO/DB 구조를 먼저 보고 상태 판단과 데이터 매핑 책임을 명확히 합니다.",
+    "화면과 데이터 연결",
+    "프론트엔드 이벤트, 백엔드 API, VO, DB 테이블 간 데이터 흐름이 어긋나지 않도록 구현 기준을 맞춥니다.",
   ],
   [
     "04",
-    "Operation & Documentation",
-    "운영 이슈는 Kibana 로그, Trace ID, DB 상태를 함께 확인하고 원인과 조치 내용을 문서화합니다.",
+    "운영 로그 기반 확인",
+    "오류가 발생하면 화면 증상만 보지 않고 Kibana 로그, Trace ID, API 경로, DB 상태를 함께 확인하며 원인을 추적합니다.",
   ],
   [
     "05",
-    "AI-assisted Development",
-    "Codex, GPT, Gemini를 활용해 코드 초안 작성, 리팩토링 방향 검토, 문서 정리, 구현 아이디어 비교를 빠르게 검증합니다.",
+    "AI-assisted Workflow",
+    "Codex, GPT, Gemini를 활용해 코드 초안, 리팩터링, 오류 분석, 문서 정리를 보조하고, 함수와 이벤트에는 의도 주석을 남겨 수정 가능성을 높입니다.",
   ],
 ];
 
@@ -253,7 +273,7 @@ function CredentialLogo({ logo, fallback, title }) {
             <img
                 src={logo}
                 alt={`${title} mark`}
-                className="h-12 w-12 object-contain"
+                className="h-11 w-11 object-contain"
                 loading="lazy"
                 onError={() => setFailed(true)}
             />
@@ -275,7 +295,7 @@ function CredentialCard({ credential }) {
               isMajor ? "min-h-[300px]" : "min-h-[240px]"
           }`}
       >
-        <div className="absolute right-5 top-5 text-[11px] font-black uppercase tracking-[0.22em] text-neutral-300 transition group-hover:text-white/30">
+        <div className="absolute right-5 top-5 max-w-[120px] text-right text-[10px] font-black uppercase leading-4 tracking-[0.16em] text-neutral-300 transition group-hover:text-white/30">
           {credential.focus}
         </div>
 
@@ -374,7 +394,7 @@ function IntroGate({ onEnter }) {
               />
 
               <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
-                Backend / DevOps
+                Backend / Frontend
               </div>
 
               <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
@@ -390,22 +410,25 @@ function IntroGate({ onEnter }) {
 
             <div className="mb-8 flex flex-wrap gap-2">
               {domains.map((domain) => (
-                  <span key={domain} className="border border-black px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]">
+                  <span
+                      key={domain}
+                      className="border border-black px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]"
+                  >
                 {domain}
               </span>
               ))}
             </div>
 
-            <h1 className="max-w-4xl text-6xl font-black leading-[0.98] tracking-[-0.08em] md:text-8xl">
-              문제를 고치는 데서 끝내지 않고,
+            <h1 className="max-w-4xl text-4xl font-black leading-[1.08] tracking-[-0.07em] md:text-6xl">
+              백엔드와 프론트엔드 구현 경험을 바탕으로,
               <br />
-              반복되는 구조를 바꿉니다.
+              운영과 인프라까지 시야를 넓히고 있습니다.
             </h1>
 
             <p className="mt-10 max-w-2xl text-lg leading-9 text-neutral-600">
-              SI 실무에서 마주한 업무 시스템의 문제를 Java/Spring, React, DB, 운영 로그 관점으로 연결해 해결했습니다.
+              SI 실무에서 업무 흐름, 화면, API, 데이터 처리, 운영 로그를 함께 다루며 시스템이 동작하는 흐름을 익혔습니다.
               <br />
-              그리고 그 경험을 Spring MSA, Video Streaming, AI 활용 방식으로 확장하고 있습니다.
+              이제는 그 경험을 클라우드, DevOps, 인프라 운영 관점으로 확장하고 있습니다.
             </p>
 
             <div className="mt-12 flex flex-wrap gap-3">
@@ -414,26 +437,18 @@ function IntroGate({ onEnter }) {
                   onClick={() => onEnter("credentials")}
                   className="group border border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:-translate-y-1"
               >
-                자격·기술 보기
+                Credentials부터 보기
                 <span className="ml-3 inline-block transition group-hover:translate-x-1">
                 →
               </span>
-              </button>
-
-              <button
-                  type="button"
-                  onClick={() => onEnter("side-projects")}
-                  className="border border-black bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:-translate-y-1 hover:bg-black hover:text-white"
-              >
-                프로젝트 바로 보기
               </button>
             </div>
 
             <div className="mt-16 grid border-y border-black md:grid-cols-3">
               {[
-                ["Role", "Backend / DevOps"],
+                ["Role", "Backend / Frontend"],
+                ["View", "System Flow / Structure"],
                 ["Track", "MSA / Video / AI"],
-                ["Credential", "SQLD / ADsP / Network / IT"],
               ].map(([k, v], index) => (
                   <div
                       key={k}
