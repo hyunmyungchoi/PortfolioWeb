@@ -12,18 +12,21 @@ const navItems = [
 
 const domains = ["MSA", "Video Streaming", "TAX"];
 
-const profileLinks = [
+const springMsaLinks = [
   {
     label: "GitHub",
-    href: "https://github.com/hyunmyungchoi",
+    href: "https://github.com/hyunmyungchoi/Spring-React-MSA",
     logo: "https://cdn.simpleicons.org/github/000000",
     fallback: "GH",
   },
+];
+
+const videoStreamingLinks = [
   {
-    label: "Velog",
-    href: "https://velog.io/@hyunmyungchoi/posts",
-    logo: "https://cdn.simpleicons.org/velog/20C997",
-    fallback: "VE",
+    label: "GitHub",
+    href: "https://github.com/hyunmyungchoi/Video-Streaming-Platform",
+    logo: "https://cdn.simpleicons.org/github/000000",
+    fallback: "GH",
   },
 ];
 
@@ -92,15 +95,12 @@ const credentials = [
 ];
 
 const skills = [
-  { name: "Java", logo: "https://cdn.simpleicons.org/openjdk/000000", fallback: "J" },
-  { name: "Spring", logo: "https://cdn.simpleicons.org/spring/6DB33F", fallback: "S" },
-  { name: "Spring Security", logo: "https://cdn.simpleicons.org/springsecurity/6DB33F", fallback: "SEC" },
-  { name: "Authorization Server", logo: "https://cdn.simpleicons.org/openid/000000", fallback: "AUTH" },
-  { name: "OAuth2/OIDC", logo: "https://cdn.simpleicons.org/openid/000000", fallback: "OIDC" },
+  { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", fallback: "JAVA" },
+  { name: "Spring", logo: "https://cdn.simpleicons.org/spring/6DB33F", fallback: "SP" },
   { name: "BFF Pattern", logo: "https://cdn.simpleicons.org/jsonwebtokens/000000", fallback: "BFF" },
   { name: "React", logo: "https://cdn.simpleicons.org/react/61DAFB", fallback: "R" },
   { name: "TypeScript", logo: "https://cdn.simpleicons.org/typescript/3178C6", fallback: "TS" },
-  { name: "Oracle", logo: "https://cdn.simpleicons.org/oracle/F80000", fallback: "DB" },
+  { name: "Oracle", logo: "https://api.iconify.design/mdi:database.svg?color=%23A3A3A3", fallback: "DB" },
   { name: "MyBatis", logo: "https://cdn.simpleicons.org/apache/000000", fallback: "SQL" },
   { name: "Redis", logo: "https://cdn.simpleicons.org/redis/FF4438", fallback: "RE" },
   { name: "Kafka", logo: "https://cdn.simpleicons.org/apachekafka/231F20", fallback: "K" },
@@ -138,37 +138,37 @@ const workItems = [
     desc: "Staging과 Production 환경에서 Kibana 로그, API 경로, 사용자 ID, 오류 코드, Trace ID를 기준으로 이슈를 분석했습니다. 로그와 DB 상태를 함께 확인하며 외부 연계 실패나 데이터 처리 예외의 원인을 좁혀갔습니다.",
   },
   {
-    title: "AI-assisted Development",
-    role: "Codex · GPT · Gemini · 개발 속도 개선",
-    desc: "Codex, GPT, Gemini를 활용해 코드 초안 작성, 리팩터링 방향 검토, 오류 원인 정리, 문서화를 빠르게 보조했습니다. 특히 이벤트 처리와 주요 함수에는 의도 주석을 남겨 AI Agent가 수정 범위를 이해하기 쉽게 관리했습니다.",
+    title: "Change-safe Implementation",
+    role: "영향 범위 확인 · 조건 분기 정리 · 수정 근거 기록",
+    desc: "기존 업무 로직을 수정할 때는 화면 증상만 보고 바로 고치기보다, 관련 조건 분기와 DB 상태, 배치 영향, 알림 흐름까지 함께 확인했습니다. 수정 후에는 왜 바꿨는지와 어떤 케이스를 막기 위한 변경인지 남겨 재수정 가능성을 줄이는 방향으로 작업했습니다.",
   },
 ];
 
 const approaches = [
   [
     "01",
-    "업무 흐름 먼저 이해",
-    "화면 단위로만 보지 않고 신청, 검토, 승인, 반려, 완료처럼 업무 상태가 어떻게 이어지는지 먼저 정리합니다.",
+    "업무 흐름을 먼저 세웁니다",
+    "화면 하나만 보지 않고 신청, 검토, 승인, 반려, 완료처럼 상태가 어떻게 이동하는지 먼저 정리합니다. 그래서 수정할 때도 버튼 하나, 쿼리 하나가 전체 프로세스에서 어떤 의미인지 같이 확인합니다.",
   ],
   [
     "02",
-    "반복 로직 공통화",
-    "검증, 알림, 상태 판단, 데이터 매핑처럼 여러 화면과 서비스에서 반복되는 로직은 공통 구조로 분리하려고 합니다.",
+    "조건과 예외를 끝까지 따라갑니다",
+    "단순 정상 케이스보다 상태값, 마감일, 제출 여부, 승인 여부처럼 문제가 생기기 쉬운 조건을 먼저 봅니다. 애매한 요구사항은 코드로 바로 옮기기보다 케이스를 쪼개서 기준을 명확히 잡으려 합니다.",
   ],
   [
     "03",
-    "화면과 데이터 연결",
-    "프론트엔드 이벤트, 백엔드 API, VO, DB 테이블 간 데이터 흐름이 어긋나지 않도록 구현 기준을 맞춥니다.",
+    "화면 · API · DB를 연결해서 봅니다",
+    "프론트엔드 이벤트, 백엔드 서비스, VO, SQL, 테이블 데이터가 따로 놀지 않도록 흐름을 맞춥니다. 오류가 나면 화면에서 멈추지 않고 실제 요청값과 DB 반영 결과까지 확인하는 편입니다.",
   ],
   [
     "04",
-    "운영 로그 기반 확인",
-    "오류가 발생하면 화면 증상만 보지 않고 Kibana 로그, Trace ID, API 경로, DB 상태를 함께 확인하며 원인을 추적합니다.",
+    "운영 로그로 원인을 좁힙니다",
+    "운영 이슈는 추측으로 판단하지 않고 Kibana 로그, Trace ID, API 경로, 사용자 ID, DB 상태를 함께 확인합니다. 증상보다 근거를 먼저 잡고, 재현 가능한 단위로 문제를 좁히는 방식을 선호합니다.",
   ],
   [
     "05",
-    "AI 기반 개발 보조",
-    "Codex, GPT, Gemini를 활용해 코드 초안, 리팩터링, 오류 분석, 문서 정리를 보조하고, 함수와 이벤트에는 의도 주석을 남겨 수정 가능성을 높입니다.",
+    "AI는 부사수처럼 쓰고 판단은 직접 합니다",
+    "Codex, GPT, Gemini는 초안 작성, 리팩터링 검토, 오류 원인 정리, 문서화에 적극적으로 활용합니다. 다만 최종 반영 전에는 업무 규칙, 영향 범위, 실제 데이터 기준으로 다시 검토해 AI 결과를 그대로 믿지 않고 개발 판단의 보조 도구로 사용합니다.",
   ],
 ];
 
@@ -201,7 +201,7 @@ const sideProjects = [
       "Gateway Routing 테스트",
       "PowerShell Invoke-RestMethod 기반 API 흐름 확인",
     ],
-    evidence: profileLinks,
+    evidence: springMsaLinks,
   },
   {
     id: "video-streaming",
@@ -231,7 +231,7 @@ const sideProjects = [
       "WebSocket 연결/해제 테스트",
       "스트리밍 아키텍처 README와 실행 GIF 정리",
     ],
-    evidence: profileLinks,
+    evidence: videoStreamingLinks,
   },
 ];
 
@@ -281,8 +281,8 @@ function SkillBadge({ logo, fallback, name }) {
   const [failed, setFailed] = useState(false);
 
   return (
-      <span className="group inline-flex items-center border border-black text-sm font-medium transition hover:-translate-y-1 hover:bg-black hover:text-white">
-      <span className="grid h-12 min-w-12 place-items-center border-r border-black bg-white px-3 group-hover:border-white">
+      <span className="group flex w-full min-w-0 items-center border border-black text-sm font-medium transition hover:-translate-y-1 hover:bg-black hover:text-white">
+      <span className="grid h-12 w-12 shrink-0 place-items-center border-r border-black bg-white group-hover:border-white">
         {!failed ? (
             <img
                 src={logo}
@@ -297,7 +297,9 @@ function SkillBadge({ logo, fallback, name }) {
           </span>
         )}
       </span>
-      <span className="px-4 py-3">{name}</span>
+      <span className="min-w-0 flex-1 px-4 py-3 leading-5 break-keep">
+        {name}
+      </span>
     </span>
   );
 }
@@ -457,7 +459,7 @@ function IntroGate({ onEnter }) {
               ))}
             </div>
 
-            <h1 className="max-w-4xl text-4xl font-black leading-[1.08] tracking-[-0.07em] md:text-4xl">
+            <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.12] tracking-[-0.05em] md:text-4xl">
               <span className="block">
                 백엔드와 프론트엔드 구현 경험을 바탕으로,
               </span>
@@ -536,29 +538,43 @@ export default function CleanLinePortfolio() {
   useEffect(() => {
     if (!entered) return;
 
-    const sections = navItems
-        .map((item) => document.getElementById(item.id))
-        .filter(Boolean);
+    const sectionIds = navItems.map((item) => item.id);
 
-    const observer = new IntersectionObserver(
-        (entries) => {
-          const visible = entries
-              .filter((entry) => entry.isIntersecting)
-              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    const updateActiveSection = () => {
+      const scrollTop = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
 
-          if (visible?.target?.id) {
-            setActive(visible.target.id);
-          }
-        },
-        {
-          root: null,
-          rootMargin: "-25% 0px -55% 0px",
-          threshold: [0.15, 0.3, 0.5],
-        }
-    );
+      // 맨 아래까지 내려왔으면 마지막 섹션(Contact)을 강제로 active 처리
+      if (scrollTop + viewportHeight >= documentHeight - 8) {
+        setActive(sectionIds[sectionIds.length - 1]);
+        return;
+      }
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+      const currentSection = sectionIds
+          .map((id) => document.getElementById(id))
+          .filter(Boolean)
+          .map((section) => ({
+            id: section.id,
+            top: section.getBoundingClientRect().top,
+          }))
+          .filter((section) => section.top <= viewportHeight * 0.35)
+          .sort((a, b) => b.top - a.top)[0];
+
+      if (currentSection?.id) {
+        setActive(currentSection.id);
+      }
+    };
+
+    updateActiveSection();
+
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, [entered]);
 
   const activeLabel = navItems.find((item) => item.id === active)?.label ?? "Credentials";
@@ -692,7 +708,7 @@ export default function CleanLinePortfolio() {
               id="credentials"
               index={1}
               title="Credentials"
-              desc="데이터, 네트워크, 소프트웨어 개발 기본기를 자격증으로 보완했습니다. 실제 자격증 배지 이미지는 발급기관 링크에서 확인하도록 두고, 화면에서는 대중적으로 인식 가능한 대표 기술 마크를 사용했습니다."
+              desc="자격증은 기술력을 과장하기 위한 요소가 아니라, 업무 시스템 개발에 필요한 기본기를 보완해 온 기록입니다. 데이터 구조, SQL, 네트워크, 소프트웨어 개발 기초를 바탕으로 화면·API·DB·운영 흐름을 함께 이해하려고 합니다."
           >
             <div className="grid border-l border-t border-black md:grid-cols-2 xl:grid-cols-3">
               {credentials.map((credential) => (
@@ -701,13 +717,12 @@ export default function CleanLinePortfolio() {
             </div>
           </Section>
 
-          <Section
-              id="skills"
-              index={2}
-              title="Skills"
-              desc="기술 스택은 실제 SVG 로고를 사용하되, 전체 톤은 선과 여백 중심으로 단순하게 유지합니다."
-          >
-            <div className="flex flex-wrap gap-3 border-y border-black py-8">
+            <Section
+                id="skills"
+                index={2}
+                title="Skills"
+            >
+            <div className="grid grid-cols-2 gap-3 border-y border-black py-8 md:grid-cols-3 xl:grid-cols-5">
               {skills.map((skill) => (
                   <SkillBadge
                       key={skill.name}
@@ -742,14 +757,23 @@ export default function CleanLinePortfolio() {
               id="approach"
               index={4}
               title="Approach"
-              desc="경력기술서의 핵심 내용을 업무명 중심이 아니라 개발 방식 중심으로 압축합니다. 검증, 연계, 데이터 흐름, 운영 분석, AI 활용 경험을 통해 어떤 방식으로 문제를 다루는지 보여줍니다."
+              desc="업무를 단순 기능 단위로 보지 않고 상태 흐름, 조건 분기, 데이터 반영, 운영 로그까지 이어서 확인하는 방식을 정리했습니다. 문제를 빠르게 고치기보다 왜 발생했는지와 다시 깨지지 않게 하려면 어디를 잡아야 하는지를 먼저 봅니다."
           >
             <div className="border-y border-black">
               {approaches.map(([no, title, desc]) => (
-                  <article key={title} className="grid gap-5 border-b border-black py-7 last:border-b-0 md:grid-cols-[120px_260px_1fr]">
-                    <div className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">{no}</div>
-                    <h3 className="text-xl font-semibold tracking-[-0.05em]">{title}</h3>
-                    <p className="text-sm leading-7 text-neutral-600">{desc}</p>
+                  <article
+                      key={title}
+                      className="grid gap-4 border-b border-black py-7 last:border-b-0 md:grid-cols-[48px_minmax(280px,360px)_1fr]"
+                  >
+                    <div className="pt-1 text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">
+                      {no}
+                    </div>
+                    <h3 className="text-xl font-semibold leading-8 tracking-[-0.035em] break-keep">
+                      {title}
+                    </h3>
+                    <p className="text-sm leading-7 text-neutral-600 break-keep">
+                      {desc}
+                    </p>
                   </article>
               ))}
             </div>
@@ -844,7 +868,7 @@ export default function CleanLinePortfolio() {
                   <a
                       key={item}
                       href="#"
-                      className={`group flex items-center justify-between gap-6 py-5 text-sm font-medium transition-all hover:bg-black hover:px-4 hover:text-white ${idx >= 2 ? "border-t border-black" : ""} ${idx % 2 === 1 ? "md:border-l md:border-black" : ""}`}className={`group flex items-center justify-between gap-6 px-4 py-5 text-sm font-medium transition-all hover:bg-black hover:text-white ${idx >= 2 ? "border-t border-black" : ""} ${idx % 2 === 1 ? "md:border-l md:border-black" : ""}`}
+                      className={`group flex items-center justify-between gap-6 px-4 py-5 text-sm font-medium transition-all hover:bg-black hover:text-white ${idx >= 2 ? "border-t border-black" : ""} ${idx % 2 === 1 ? "md:border-l md:border-black" : ""}`}
                   >
                     <span>{item}</span>
                     <span className="transition group-hover:translate-x-1">→</span>
