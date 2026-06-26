@@ -185,8 +185,7 @@ const sideProjects = [
     id: "spring-msa",
     title: "Spring MSA Platform",
     oneLine: "실무에서 경험한 구조적 문제를 Spring 기반 서비스 분리 구조로 다시 정리한 프로젝트",
-    desc: "프론트엔드 독립 빌드, 세션 관리, 권한 분리, 외부 인터페이스 테스트, 대시보드 집계 문제를 Gateway, BFF, Authorization Server, Redis Session, 도메인 서비스 분리 관점으로 다시 설계했습니다. Docker Compose 기반 로컬 실행 환경에서 시작해 GitHub Actions, Kubernetes, Argo CD, AWS 배포 구조로 확장하며 애플리케이션이 실제 운영 환경에 올라가는 흐름까지 검증하는 방향으로 발전시키고 있습니다.",    stack: "Spring Boot · Spring Security · Authorization Server · Gateway · BFF · Redis · PostgreSQL · React · Docker",
-    status: "MSA / CI-CD / Kubernetes Lab",
+    desc: "프론트엔드 독립 빌드, 세션 관리, 권한 분리, 외부 인터페이스 테스트, 대시보드 집계 문제를 Gateway, BFF, Authorization Server, Redis Session, 도메인 서비스 분리 관점으로 다시 설계했습니다. Docker Compose 기반 로컬 실행 환경을 구성했고, 이후 GitHub Actions, Kubernetes, Argo CD, AWS 배포 구조로 확장할 계획입니다.",    status: "MSA / Docker-based Lab / DevOps Track",
     architecture: [
       "Public Gateway / Admin Gateway로 사용자 채널과 관리자 채널 분리",
       "Business BFF / Admin BFF에서 브라우저 토큰 저장 없이 Redis Session 기반 인증 상태 관리",
@@ -225,14 +224,11 @@ const sideProjects = [
       "Redis로 현재 방송 상태, 시청자 수, 방 세션, 채팅 제한, 토큰/세션 정보 관리",
     ],
     implemented: [
-      "Gateway → BFF → Authorization Server → Resource Server 인증 흐름 구현",
-      "Redis Session Store, Refresh Token/ID Token 서버 측 저장 구조 적용",
-      "Business/Admin 채널 분리와 ROLE_USER / ROLE_ADMIN 접근 경계 구성",
-      "Docker Compose 기반 로컬 실행 환경 구성",
-      "GitHub Actions 기반 Build / Test / Docker Image Build 파이프라인 구성 예정",
-      "Kubernetes 배포 매니페스트와 Argo CD GitOps 배포 흐름 확장 예정",
-      "Argo CD를 활용한 GitOps 배포 흐름과 OutOfSync / Sync 반영 과정 검증",
-      "API 문서와 실행 가이드 정리",
+      "OBS RTMP 송출과 nginx-rtmp 수신 구조 구성",
+      "FFmpeg 컨테이너 기반 HLS/DASH 변환 파이프라인 구현",
+      "Shaka Player 기반 DASH/HLS 브라우저 재생 구현",
+      "WebSocket 기반 채팅과 WebRTC Signaling API 구현",
+      "Docker Compose 기반 로컬 스트리밍 MVP 실행 환경 구성",
     ],
     tests: [
       "RTMP 송출 → HLS/DASH 재생 시나리오 테스트",
@@ -494,7 +490,7 @@ function IntroGate({ onEnter }) {
               />
 
               <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
-                Backend / Frontend
+                Backend / DevOps
               </div>
 
               <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
