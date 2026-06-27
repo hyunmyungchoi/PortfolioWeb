@@ -276,7 +276,7 @@ const archives = [
     category: "Cloud / DevOps",
     title: "AWS S3와 CloudFront로 포트폴리오 배포하기",
     desc: "Vite 빌드 산출물을 S3에 배포하고 CloudFront를 통해 공개 접근 가능한 정적 웹 서비스로 운영하는 과정을 정리합니다.",
-    href: "#",
+    href: "https://velog.io/@hyunmyungchoi/AWS-S3%EC%99%80-CloudFront%EB%A1%9C-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-%EC%A0%95%EC%A0%81-%EC%9B%B9-%EB%B0%B0%ED%8F%AC-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B5%AC%EC%84%B1-%EA%B8%B0%EB%A1%9D",
     status: "Planned",
   },
   {
@@ -914,7 +914,7 @@ export default function CleanLinePortfolio() {
           <Section
               id="deployment"
               index={6}
-              title="Cloud Deployment Test"
+              title="Cloud Deployment"
               desc="PortfolioWeb을 AWS 기반 정적 웹 서비스로 배포하고, 빌드 산출물, 배포 경로, 도메인 접근, 캐시 정책까지 정리하여 누구나 접속 가능한 포트폴리오 형태로 운영합니다."
           >
             <div className="grid border-y border-black lg:grid-cols-3">
