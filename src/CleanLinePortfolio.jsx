@@ -6,7 +6,6 @@ const navItems = [
   { id: "work", label: "Work" },
   { id: "approach", label: "Approach" },
   { id: "side-projects", label: "Side Projects" },
-  { id: "deployment", label: "Deployment" },
   { id: "archive", label: "Archive" },
   { id: "contact", label: "Contact" },
 ];
@@ -292,8 +291,8 @@ const archives = [
   },
   {
     category: "Cloud / DevOps",
-    title: "AWS S3와 CloudFront로 포트폴리오 배포하기",
-    desc: "Vite 빌드 산출물을 S3에 배포하고 CloudFront를 통해 공개 접근 가능한 정적 웹 서비스로 운영하는 과정을 정리합니다.",
+    title: "왜 S3 + CloudFront로 포트폴리오를 배포했는가",
+    desc: "Vite 기반 정적 웹앱이라는 특성을 기준으로 EC2, Amplify, Vercel 대신 S3와 CloudFront를 선택한 이유를 정리했습니다.",
     href: "https://velog.io/@hyunmyungchoi/AWS-S3%EC%99%80-CloudFront%EB%A1%9C-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-%EC%A0%95%EC%A0%81-%EC%9B%B9-%EB%B0%B0%ED%8F%AC-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B5%AC%EC%84%B1-%EA%B8%B0%EB%A1%9D",
     status: "Published",
   },
@@ -561,6 +560,35 @@ function IntroGate({ onEnter }) {
           </div>
         </section>
       </main>
+  );
+}
+
+function PortfolioDeployNote({ href }) {
+  return (
+    <div className="border-y border-black py-6">
+      <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500">
+            Portfolio Deployment
+          </p>
+
+          <p className="mt-3 text-sm leading-7 text-neutral-600">
+            React + Vite로 구현한 이 포트폴리오는 AWS S3를 origin으로 사용하고,
+            CloudFront를 통해 HTTPS 기반 정적 웹 서비스로 배포했습니다.
+          </p>
+        </div>
+
+        <a
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+          className="group inline-flex shrink-0 items-center gap-3 border border-black px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
+        >
+          Why S3 + CloudFront?
+          <span className="transition group-hover:translate-x-1">→</span>
+        </a>
+      </div>
+    </div>
   );
 }
 
@@ -906,47 +934,8 @@ export default function CleanLinePortfolio() {
             </div>
           </Section>
           <Section
-              id="deployment"
-              index={6}
-              title="Cloud Deployment"
-              desc="PortfolioWeb은 Vite 기반 React 정적 웹앱으로, 별도의 서버 런타임 없이 빌드 산출물만으로 배포할 수 있는 구조입니다. 정적 파일 제공에 적합한 S3를 origin으로 사용하고, CloudFront를 앞단에 두어 HTTPS, 캐시, 전역 엣지 전송 구조를 구성했습니다."
-          >
-            <div className="grid border-y border-black lg:grid-cols-3">
-              {deploymentItems.map((item, idx) => (
-                <article
-                  key={item.title}
-                  className={`p-6 ${idx !== 0 ? "border-t border-black lg:border-l lg:border-t-0" : ""}`}
-                >
-                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
-                    {item.role}
-                  </p>
-
-                  <h3 className="mt-5 text-2xl font-semibold tracking-[-0.04em]">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-4 text-sm leading-7 text-neutral-600">
-                    {item.desc}
-                  </p>
-                </article>
-              ))}
-            </div>
-
-            <div className="mt-8 flex justify-end">
-              <a
-                href={deploymentReadMoreLink}
-                target="_blank"
-                rel="noreferrer"
-                className="group inline-flex items-center gap-3 border border-black px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
-              >
-                Why S3 + CloudFront?
-                <span className="transition group-hover:translate-x-1">→</span>
-              </a>
-            </div>
-          </Section>
-          <Section
               id="archive"
-              index={7}
+              index={6}
               title="Archive"
               desc="실무에서 마주친 운영 이슈, 백엔드 구조화, 프론트엔드 리팩터링 경험과 함께 Docker, CI/CD, Kubernetes, AWS로 확장하는 과정을 기술 기록으로 정리합니다."
           >
@@ -998,10 +987,9 @@ export default function CleanLinePortfolio() {
               })}
             </div>
           </Section>
-
           <Section
               id="contact"
-              index={8}
+              index={7}
               title="Contact"
               desc="깃허브, 기술 기록, 이력서 링크만 간단히 정리했습니다."
           >
@@ -1014,19 +1002,20 @@ export default function CleanLinePortfolio() {
                       rel={item.href === "#" ? undefined : "noreferrer"}
                       className="group inline-flex items-center gap-3 border border-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
                   >
-        <span className="grid h-6 w-6 place-items-center border border-black bg-white transition group-hover:border-white">
-          <img
-              src={item.logo}
-              alt={`${item.label} logo`}
-              className="h-4 w-4 object-contain transition group-hover:scale-110"
-              loading="lazy"
-          />
-        </span>
+                  <span className="grid h-6 w-6 place-items-center border border-black bg-white transition group-hover:border-white">
+                    <img
+                        src={item.logo}
+                        alt={`${item.label} logo`}
+                        className="h-4 w-4 object-contain transition group-hover:scale-110"
+                        loading="lazy"
+                    />
+                  </span>
                     {item.label}
                   </a>
               ))}
             </div>
           </Section>
+          <PortfolioDeployNote href={deploymentReadMoreLink} />
         </div>
       </main>
   );
