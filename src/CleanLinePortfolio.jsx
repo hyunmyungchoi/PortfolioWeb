@@ -243,6 +243,28 @@ const sideProjects = [
   },
 ];
 
+
+const deploymentItems = [
+  {
+    title: "Static Hosting Decision",
+    role: "AWS S3 / CloudFront",
+    desc: "PortfolioWeb은 Vite 기반 React 정적 웹앱이므로 별도의 WAS나 EC2 서버를 운영하지 않고, S3를 정적 파일 저장소이자 CloudFront origin으로 사용했습니다.",
+  },
+  {
+    title: "CDN & HTTPS",
+    role: "CloudFront / Cache / HTTPS",
+    desc: "S3 단독 공개보다 CloudFront를 앞단에 두어 HTTPS 접근, 캐시 기반 응답, 전역 엣지 전송 구조를 구성했습니다.",
+  },
+  {
+    title: "Deployment Automation",
+    role: "GitHub Actions",
+    desc: "master 브랜치 push 이후 build, S3 sync, CloudFront invalidation이 이어지도록 구성하여 수동 업로드 없이 배포되도록 정리했습니다.",
+  },
+];
+
+const deploymentReadMoreLink =
+  "https://velog.io/@hyunmyungchoi/AWS-S3%EC%99%80-CloudFront%EB%A1%9C-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-%EC%A0%95%EC%A0%81-%EC%9B%B9-%EB%B0%B0%ED%8F%AC-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B5%AC%EC%84%B1-%EA%B8%B0%EB%A1%9D";
+
 const archives = [
   {
     category: "Operations",
@@ -915,41 +937,39 @@ export default function CleanLinePortfolio() {
               id="deployment"
               index={6}
               title="Cloud Deployment"
-              desc="PortfolioWeb을 AWS 기반 정적 웹 서비스로 배포하고, 빌드 산출물, 배포 경로, 도메인 접근, 캐시 정책까지 정리하여 누구나 접속 가능한 포트폴리오 형태로 운영합니다."
+              desc="PortfolioWeb은 Vite 기반 React 정적 웹앱으로, 별도의 서버 런타임 없이 빌드 산출물만으로 배포할 수 있는 구조입니다. 정적 파일 제공에 적합한 S3를 origin으로 사용하고, CloudFront를 앞단에 두어 HTTPS, 캐시, 전역 엣지 전송 구조를 구성했습니다."
           >
             <div className="grid border-y border-black lg:grid-cols-3">
-              {[
-                [
-                  "Hosting",
-                  "AWS S3 / CloudFront",
-                  "Vite 빌드 산출물을 S3에 업로드하고 CloudFront를 통해 전역 캐시 기반으로 제공합니다.",
-                ],
-                [
-                  "Delivery",
-                  "GitHub Actions",
-                  "master 브랜치 push 시 build 후 S3 sync 및 CloudFront invalidation을 수행하는 배포 흐름으로 확장합니다.",
-                ],
-                [
-                  "Access",
-                  "HTTPS / Public Access",
-                  "CloudFront HTTPS 엔드포인트를 통해 누구나 접근 가능한 포트폴리오 웹으로 운영합니다.",
-                ],
-              ].map(([title, role, desc], idx) => (
-                  <article
-                      key={title}
-                      className={`p-6 ${idx !== 0 ? "border-t border-black lg:border-l lg:border-t-0" : ""}`}
-                  >
-                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
-                      {role}
-                    </p>
-                    <h3 className="mt-5 text-2xl font-semibold tracking-[-0.04em]">
-                      {title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-7 text-neutral-600">
-                      {desc}
-                    </p>
-                  </article>
+              {deploymentItems.map((item, idx) => (
+                <article
+                  key={item.title}
+                  className={`p-6 ${idx !== 0 ? "border-t border-black lg:border-l lg:border-t-0" : ""}`}
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-neutral-500">
+                    {item.role}
+                  </p>
+
+                  <h3 className="mt-5 text-2xl font-semibold tracking-[-0.04em]">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-4 text-sm leading-7 text-neutral-600">
+                    {item.desc}
+                  </p>
+                </article>
               ))}
+            </div>
+
+            <div className="mt-8 flex justify-end">
+              <a
+                href={deploymentReadMoreLink}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-3 border border-black px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
+              >
+                Read More
+                <span className="transition group-hover:translate-x-1">→</span>
+              </a>
             </div>
           </Section>
           <Section
