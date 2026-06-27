@@ -263,7 +263,7 @@ const deploymentItems = [
 ];
 
 const deploymentReadMoreLink =
-  "https://velog.io/@hyunmyungchoi/AWS-S3%EC%99%80-CloudFront%EB%A1%9C-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-%EC%A0%95%EC%A0%81-%EC%9B%B9-%EB%B0%B0%ED%8F%AC-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B5%AC%EC%84%B1-%EA%B8%B0%EB%A1%9D";
+  "https://velog.io/@hyunmyungchoi/%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EC%9B%B9-%EB%B0%B0%ED%8F%AC-%EA%B5%AC%EC%84%B1-S3-CloudFront%EB%A5%BC-%EC%B1%84%ED%83%9D%ED%95%9C-%EC%9D%B4%EC%9C%A0";
 
 const archives = [
   {
