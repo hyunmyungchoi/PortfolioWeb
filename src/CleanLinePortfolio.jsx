@@ -377,7 +377,7 @@ function SkillBadge({ logo, fallback, name }) {
           </span>
         )}
       </span>
-      <span className="min-w-0 flex-1 px-4 py-3 leading-5 break-keep">
+      <span className="min-w-0 flex-1 px-3 py-3 text-[13px] leading-none whitespace-nowrap overflow-hidden text-ellipsis">
         {name}
       </span>
     </span>
@@ -802,7 +802,7 @@ export default function CleanLinePortfolio() {
                 index={2}
                 title="Skills"
             >
-            <div className="grid grid-cols-2 gap-3 border-y border-black py-8 md:grid-cols-3 xl:grid-cols-5">
+            <div className="grid grid-cols-2 gap-3 border-y border-black py-8 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
               {skills.map((skill) => (
                   <SkillBadge
                       key={skill.name}
