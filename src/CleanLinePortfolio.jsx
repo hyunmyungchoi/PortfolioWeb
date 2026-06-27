@@ -59,8 +59,6 @@ const credentials = [
     issuer: "KData",
     desc: "관계형 데이터베이스, SQL, 모델링 기본 이해",
     focus: "RDB / SQL",
-    logo: "https://cdn.simpleicons.org/postgresql/000000",
-    fallback: "SQL",
     weight: "normal",
   },
   {
@@ -69,8 +67,6 @@ const credentials = [
     issuer: "KData",
     desc: "데이터 분석 프로세스, 통계, 분석 기획 기본 이해",
     focus: "Data Analysis",
-    logo: "https://cdn.simpleicons.org/googleanalytics/000000",
-    fallback: "DATA",
     weight: "normal",
   },
   {
@@ -79,8 +75,6 @@ const credentials = [
     issuer: "한국정보통신협회",
     desc: "TCP/IP, 네트워크 구성, 인프라 기본 개념",
     focus: "Network",
-    logo: "https://cdn.simpleicons.org/cisco/000000",
-    fallback: "NET",
     weight: "normal",
   },
   {
@@ -89,8 +83,6 @@ const credentials = [
     issuer: "한국산업인력공단",
     desc: "소프트웨어 개발, 데이터베이스, 업무 시스템 구현에 필요한 기본기",
     focus: "Software",
-    logo: "https://cdn.simpleicons.org/codecademy/000000",
-    fallback: "IT",
     weight: "normal",
   },
 ];
@@ -110,7 +102,11 @@ const skills = [
   { name: "Kafka", logo: "https://cdn.simpleicons.org/apachekafka/231F20", fallback: "K" },
   { name: "Docker", logo: "https://cdn.simpleicons.org/docker/2496ED", fallback: "DO" },
   { name: "Kubernetes", logo: "https://cdn.simpleicons.org/kubernetes/326CE5", fallback: "K8S" },
-  { name: "AWS", logo: "https://cdn.simpleicons.org/amazonwebservices/232F3E", fallback: "AWS" },
+  {
+    name: "AWS",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
+    fallback: "AWS",
+  },
   { name: "GitHub Actions", logo: "https://cdn.simpleicons.org/githubactions/2088FF", fallback: "CI" },
   { name: "Argo CD", logo: "https://cdn.simpleicons.org/argo/EF7B4D", fallback: "CD" },
   { name: "Nginx", logo: "https://cdn.simpleicons.org/nginx/009639", fallback: "NX" },
@@ -121,32 +117,32 @@ const skills = [
 
 const workItems = [
   {
-    title: "Backend Workflow Implementation",
+    title: "업무 흐름 기반 백엔드 구현",
     role: "Java · Spring · 업무 상태 처리",
     desc: "OBA 업무의 신청, 검토, 승인, 반려, 완료 흐름에 맞춰 백엔드 API와 상태 처리 로직을 구현했습니다. 단순 데이터 저장보다 업무 단계별 상태값과 후속 처리 흐름이 맞게 이어지는지를 기준으로 개발했습니다.",
   },
   {
-    title: "Validation & Notification Module",
+    title: "검증 및 알림 모듈 구현",
     role: "Spring Validation · Mail · SMS · Portal Message",
     desc: "Spring Validation과 커스텀 ConstraintValidator를 활용해 업무 규칙 기반 요청값 검증을 구현하고, 신청 상태 변경·담당자 배정·승인·반려·처리 완료 시점에 맞춰 Mail, SMS, Portal Message 알림 기능을 연계했습니다.",
   },
   {
-    title: "Internal API & Batch Processing",
+    title: "내부 API 연계 및 배치 자동화",
     role: "Feign Client · Spring Batch · 자동 처리",
     desc: "Feign Client 기반 내부 API 연계 구조를 구현하고, Spring Batch를 활용해 정기적으로 수행되는 업무 상태 전환과 후속 처리 자동화 로직을 개발했습니다. 처리 결과와 DB 상태를 함께 확인하며 배치 수행 흐름을 검증했습니다.",
   },
   {
-    title: "Frontend Component Refactoring",
+    title: "프론트엔드 컴포넌트 리팩터링",
     role: "React · TypeScript · Component · Custom Hook",
     desc: "검색 영역, 상세 영역, 공통 정보 영역을 컴포넌트 단위로 분리하고, 반복되는 조회·이벤트·상태 관리 로직을 Custom Hook으로 분리했습니다. 대형 화면 컴포넌트의 책임을 줄이고 재사용성과 유지보수성을 높이는 데 집중했습니다.",
   },
   {
-    title: "Operation Log Analysis",
+    title: "운영 로그 분석 및 이슈 추적",
     role: "Kibana · Trace ID · API Path · DB 상태 확인",
     desc: "Staging과 Production 환경에서 Kibana 로그, API 경로, 사용자 ID, 오류 코드, Trace ID를 기준으로 운영 이슈를 분석했습니다. 외부 연계 실패, API 응답 오류, 데이터 처리 예외 발생 시 로그와 DB 상태를 함께 확인하며 원인을 좁혔습니다.",
   },
   {
-    title: "Documentation & Communication",
+    title: "요구사항 정리 및 커뮤니케이션",
     role: "API Guide · Issue Report · Test Request",
     desc: "고객 요구사항과 회의 내용을 개발 가능한 기능 단위로 정리하고, API 연계 규격, 상태 흐름, 오류 케이스, 테스트 요청 내용을 문서화했습니다. 운영 이슈 발생 시 원인과 조치 내용을 정리해 고객 및 유관 팀과 공유했습니다.",
   },
@@ -359,24 +355,26 @@ function LineButton({ children, href = "#" }) {
 
 function SkillBadge({ logo, fallback, name }) {
   const [failed, setFailed] = useState(false);
+  const isAws = name === "AWS";
 
   return (
-      <span className="group flex w-full min-w-0 items-center border border-black text-sm font-medium transition hover:-translate-y-1 hover:bg-black hover:text-white">
+    <span className="group flex w-full min-w-0 items-center border border-black text-sm font-medium transition hover:-translate-y-1 hover:bg-black hover:text-white">
       <span className="grid h-12 w-12 shrink-0 place-items-center border-r border-black bg-white group-hover:border-white">
         {!failed ? (
-            <img
-                src={logo}
-                alt={`${name} logo`}
-                className="h-6 w-6 object-contain transition group-hover:scale-110"
-                loading="lazy"
-                onError={() => setFailed(true)}
-            />
+          <img
+            src={logo}
+            alt={`${name} logo`}
+            className={`${isAws ? "h-5 w-8" : "h-6 w-6"} object-contain transition group-hover:scale-110`}
+            loading="lazy"
+            onError={() => setFailed(true)}
+          />
         ) : (
-            <span className="text-[10px] font-bold uppercase tracking-[-0.04em] text-black group-hover:text-white">
+          <span className="text-[10px] font-bold uppercase tracking-[-0.04em] text-black group-hover:text-white">
             {fallback}
           </span>
         )}
       </span>
+
       <span className="min-w-0 flex-1 px-3 py-3 text-[13px] leading-none whitespace-nowrap overflow-hidden text-ellipsis">
         {name}
       </span>
@@ -384,64 +382,38 @@ function SkillBadge({ logo, fallback, name }) {
   );
 }
 
-function CredentialLogo({ logo, fallback, title }) {
-  const [failed, setFailed] = useState(false);
-
-  return (
-      <div className="grid h-20 w-20 place-items-center border border-black bg-white transition group-hover:rotate-[-2deg] group-hover:scale-105">
-        {!failed ? (
-            <img
-                src={logo}
-                alt={`${title} mark`}
-                className="h-11 w-11 object-contain"
-                loading="lazy"
-                onError={() => setFailed(true)}
-            />
-        ) : (
-            <span className="text-xs font-black uppercase tracking-[-0.04em] text-black">
-          {fallback}
-        </span>
-        )}
-      </div>
-  );
-}
 
 function CredentialCard({ credential }) {
   const isMajor = credential.weight === "major";
 
   return (
-      <article
-          className={`group relative overflow-hidden border-b border-r border-black bg-white p-7 transition duration-200 hover:-translate-y-1 hover:bg-black hover:text-white ${
-              isMajor ? "min-h-[300px]" : "min-h-[240px]"
-          }`}
-      >
-        <div className="absolute right-5 top-5 max-w-[120px] text-right text-[10px] font-black uppercase leading-4 tracking-[0.16em] text-neutral-300 transition group-hover:text-white/30">
-          {credential.focus}
-        </div>
+    <article
+      className={`group relative overflow-hidden border-b border-r border-black bg-white p-7 transition duration-200 hover:-translate-y-1 hover:bg-black hover:text-white ${
+        isMajor ? "min-h-[260px]" : "min-h-[220px]"
+      }`}
+    >
+      <div className="absolute right-5 top-5 max-w-[140px] text-right text-[10px] font-black uppercase leading-4 tracking-[0.16em] text-neutral-300 transition group-hover:text-white/30">
+        {credential.focus}
+      </div>
 
-        <CredentialLogo
-            logo={credential.logo}
-            fallback={credential.fallback}
-            title={credential.title}
-        />
-
-        <div className="mt-7 flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <span className="inline-flex border border-current px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
           {credential.code}
         </span>
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 group-hover:text-white/60">
+
+        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 group-hover:text-white/60">
           {credential.issuer}
         </span>
-        </div>
+      </div>
 
-        <h3 className={`${isMajor ? "mt-7 text-3xl" : "mt-6 text-2xl"} font-semibold leading-tight tracking-[-0.05em]`}>
-          {credential.title}
-        </h3>
+      <h3 className={`${isMajor ? "mt-8 text-3xl" : "mt-8 text-2xl"} font-semibold leading-tight tracking-[-0.05em]`}>
+        {credential.title}
+      </h3>
 
-        <p className="mt-5 text-sm leading-7 text-neutral-600 transition group-hover:text-white/70">
-          {credential.desc}
-        </p>
-      </article>
+      <p className="mt-6 text-sm leading-7 text-neutral-600 transition group-hover:text-white/70">
+        {credential.desc}
+      </p>
+    </article>
   );
 }
 
