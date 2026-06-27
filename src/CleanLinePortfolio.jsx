@@ -277,14 +277,14 @@ const archives = [
     title: "AWS S3와 CloudFront로 포트폴리오 배포하기",
     desc: "Vite 빌드 산출물을 S3에 배포하고 CloudFront를 통해 공개 접근 가능한 정적 웹 서비스로 운영하는 과정을 정리합니다.",
     href: "https://velog.io/@hyunmyungchoi/AWS-S3%EC%99%80-CloudFront%EB%A1%9C-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-%EC%A0%95%EC%A0%81-%EC%9B%B9-%EB%B0%B0%ED%8F%AC-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B5%AC%EC%84%B1-%EA%B8%B0%EB%A1%9D",
-    status: "Planned",
+    status: "Published",
   },
   {
     category: "Cloud / DevOps",
     title: "GitHub Actions 기반 배포 자동화",
     desc: "main 브랜치 push 이후 build, S3 sync, CloudFront invalidation으로 이어지는 프론트엔드 배포 흐름을 정리합니다.",
-    href: "#",
-    status: "Planned",
+    href: "https://velog.io/@hyunmyungchoi/GitHub-Actions-%EA%B8%B0%EB%B0%98-%EB%B0%B0%ED%8F%AC-%EC%9E%90%EB%8F%99%ED%99%94-push-%ED%95%9C-%EB%B2%88%EC%9C%BC%EB%A1%9C-S3%EC%99%80-CloudFront%EA%B9%8C%EC%A7%80-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0",
+    status: "Published",
   },
   {
     category: "Cloud / DevOps",
