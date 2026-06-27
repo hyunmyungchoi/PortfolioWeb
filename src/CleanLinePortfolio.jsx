@@ -513,13 +513,13 @@ function IntroGate({ onEnter }) {
                   className="aspect-[4/5] w-full object-cover"
               />
 
-              <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+              {/* <div className="absolute left-4 top-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
                 Backend / DevOps
-              </div>
+              </div> */}
 
-              <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
+              {/* <div className="absolute bottom-4 right-4 border border-black bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em]">
                 Portfolio.exe
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -726,7 +726,7 @@ export default function CleanLinePortfolio() {
             CHOI.DEV
           </a>
           <p className="mt-4 max-w-[190px] text-xs leading-6 text-neutral-500">
-            업무 흐름을 코드와 데이터 구조로 연결하고, 반복되는 문제를 유지보수 가능한 형태로 정리하려는 개발자입니다.
+            업무 흐름을 코드와 데이터 구조로 연결하고, 반복되는 문제를 유지보수 가능한 형태로 정리하려는 탐구자입니다.
           </p>
 
           <button
@@ -967,7 +967,7 @@ export default function CleanLinePortfolio() {
                 rel="noreferrer"
                 className="group inline-flex items-center gap-3 border border-black px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] transition hover:-translate-y-0.5 hover:bg-black hover:text-white"
               >
-                Read More
+                Why S3 + CloudFront?
                 <span className="transition group-hover:translate-x-1">→</span>
               </a>
             </div>
