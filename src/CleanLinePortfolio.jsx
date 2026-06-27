@@ -914,7 +914,7 @@ export default function CleanLinePortfolio() {
           <Section
               id="deployment"
               index={6}
-              title="Cloud Deployment"
+              title="Cloud Deployment Test"
               desc="PortfolioWeb을 AWS 기반 정적 웹 서비스로 배포하고, 빌드 산출물, 배포 경로, 도메인 접근, 캐시 정책까지 정리하여 누구나 접속 가능한 포트폴리오 형태로 운영합니다."
           >
             <div className="grid border-y border-black lg:grid-cols-3">
